@@ -93,13 +93,6 @@ nav {
   color: var(--white); text-transform: uppercase; text-decoration: none;
   display: flex; align-items: center; gap: .3rem;
 }
-.nav-logo-mark {
-  display: flex; gap: 3px; align-items: center; margin-right: .5rem;
-}
-.nav-logo-sq {
-  width: 7px; height: 7px; background: var(--muted);
-}
-.nav-logo-sq.accent { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
 .nav-logo span { color: var(--cyan); }
 .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 .nav-links a {
@@ -271,6 +264,7 @@ nav {
 #niches { background: var(--bg); }
 .niches-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3.5rem;
+  /* 8 niches = 2 rows × 4 */
 }
 .niche-card {
   padding: 2.2rem 1.8rem; background: var(--bg3);
@@ -421,7 +415,7 @@ nav {
 ══════════════════════════════════════ */
 #packages { background: var(--bg); }
 .pkg-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3.5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3.5rem;
 }
 .pkg-card {
   padding: 2.5rem 2rem; background: var(--bg3);
@@ -432,7 +426,7 @@ nav {
   background: var(--bg2); border-color: rgba(0,229,255,.3);
 }
 .pkg-card.featured::before {
-  content: 'РЕКОМЕНДУЕМ';
+  content: 'ПОПУЛЯРНЫЙ';
   position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
   background: var(--cyan); color: #080810;
   font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: .1em;
@@ -604,8 +598,8 @@ footer {
    RESPONSIVE
 ══════════════════════════════════════ */
 @media(max-width: 1100px) {
-  .pkg-grid { grid-template-columns: repeat(2, 1fr); }
-  .niches-grid { grid-template-columns: repeat(2, 1fr); }
+  .pkg-grid { grid-template-columns: repeat(3, 1fr); }
+  .niches-grid { grid-template-columns: repeat(4, 1fr); }
   .trust-bar { grid-template-columns: repeat(3, 1fr); }
   .trust-item:nth-child(3n) { border-right: none; }
   .trust-item:nth-child(4),
@@ -615,6 +609,8 @@ footer {
 }
 @media(max-width: 900px) {
   .container, nav, #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .niches-grid { grid-template-columns: repeat(2, 1fr); }
+  .pkg-grid { grid-template-columns: 1fr; }
   .cases-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .step:nth-child(2) { border-right: 1px solid var(--line); }
@@ -635,6 +631,7 @@ footer {
   .niches-grid { grid-template-columns: 1fr; }
   .cases-grid { grid-template-columns: 1fr; }
   .pkg-grid { grid-template-columns: 1fr; }
+  .services-tabs { flex-wrap: wrap; }
   .steps { grid-template-columns: 1fr; }
   .step { border-right: 1px solid var(--line) !important; }
   .step:first-child { border-top: 1px solid var(--line); }
@@ -661,11 +658,11 @@ footer {
 ════════════════════════ -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">
-      <div class="nav-logo-sq"></div>
-      <div class="nav-logo-sq"></div>
-      <div class="nav-logo-sq accent"></div>
-    </div>
+    <svg width="22" height="20" viewBox="0 0 130 120" fill="none" style="margin-right:.45rem;flex-shrink:0">
+      <path d="M8 112 L58 8 L72 8 L122 112" stroke="#F0F0F8" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+      <path d="M27 72 L103 72" stroke="rgba(240,240,248,.2)" stroke-width="3.5" stroke-linecap="square"/>
+      <rect x="52" y="58" width="26" height="26" fill="#00E5FF"/>
+    </svg>
     AI<span>WAY</span>
   </a>
   <ul class="nav-links">
@@ -759,28 +756,52 @@ footer {
 
     <div class="niches-grid reveal">
       <div class="niche-card">
-        <div class="niche-icon">📦</div>
-        <div class="niche-name">WB / Ozon</div>
-        <div class="niche-pain">Карточки не работают. Сотни отзывов висят без ответа. Конкуренты непонятно как обходят вас в поиске каждую неделю.</div>
-        <div class="niche-price">от $150/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon">🏠</div>
-        <div class="niche-name">Недвижимость</div>
-        <div class="niche-pain">Сотни объявлений на Avito. Лиды теряются — не успеваете отвечать. Ручная работа съедает 3–4 часа ежедневно.</div>
-        <div class="niche-price">от $200/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon">🏨</div>
-        <div class="niche-name">Отели</div>
-        <div class="niche-pain">Репутация не управляется. Гости уходят без welcome-сообщений. Негативные отзывы остаются без ответа неделями.</div>
-        <div class="niche-price">от $200/мес</div>
+        <div class="niche-icon">🛒</div>
+        <div class="niche-name">WB / Ozon / Avito</div>
+        <div class="niche-pain">Карточки не работают. Сотни отзывов висят без ответа. Конкуренты обходят в поиске каждую неделю.</div>
+        <div class="niche-price">$150–500/мес</div>
       </div>
       <div class="niche-card">
         <div class="niche-icon">🏢</div>
         <div class="niche-name">B2B / CRM</div>
         <div class="niche-pain">Лиды теряются в Bitrix24. КП пишется вручную часами. Менеджеры не успевают. Нет аналитики по воронке.</div>
-        <div class="niche-price">от $200/мес</div>
+        <div class="niche-price">$200–600/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏨</div>
+        <div class="niche-name">Отели / Bnovo</div>
+        <div class="niche-pain">Репутация не управляется. Гости уходят без welcome-сообщений. Негативные отзывы без ответа неделями.</div>
+        <div class="niche-price">$200–500/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏠</div>
+        <div class="niche-name">Недвижимость</div>
+        <div class="niche-pain">Сотни объявлений на Avito. Лиды теряются — не успеваете отвечать. Ручная работа съедает 3–4 часа ежедневно.</div>
+        <div class="niche-price">$200–500/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">👥</div>
+        <div class="niche-name">HR / Рекрутинг</div>
+        <div class="niche-pain">Скрининг резюме вручную. Онбординг не автоматизирован. HR тратит недели там, где нужны часы.</div>
+        <div class="niche-price">$400–800/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">⚖️</div>
+        <div class="niche-name">Юристы</div>
+        <div class="niche-pain">Анализ договоров вручную. Типовые документы занимают часы. Клиенты ждут ответа по 2 дня.</div>
+        <div class="niche-price">$300–600/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🎓</div>
+        <div class="niche-name">Онлайн-школы</div>
+        <div class="niche-pain">Куратор не успевает. Студенты без обратной связи уходят. TMA-платформа стоит дорого.</div>
+        <div class="niche-price">$300–700/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🍽️</div>
+        <div class="niche-name">Рестораны / Фитнес</div>
+        <div class="niche-pain">Запись вручную. Отзывы без ответа. TMA для лояльности кажется дорогим и сложным.</div>
+        <div class="niche-price">$250–500/мес</div>
       </div>
     </div>
   </div>
@@ -792,7 +813,7 @@ footer {
 <section id="services">
   <div class="container">
     <div class="tag reveal">04 // Услуги</div>
-    <h2 class="sec-title reveal">12 УСЛУГ.<br><span class="dim">3 КАТЕГОРИИ.</span></h2>
+    <h2 class="sec-title reveal">17 УСЛУГ.<br><span class="dim">5 КАТЕГОРИЙ.</span></h2>
     <p class="sec-sub reveal">Каждая услуга — результат, не процесс. «Отзывы отвечают сами», а не «интеграция WB API».</p>
 
     <div class="reveal">
@@ -800,6 +821,8 @@ footer {
         <button class="stab active" data-panel="cat1">// Маркетплейсы</button>
         <button class="stab" data-panel="cat2">// Продажи и CRM</button>
         <button class="stab" data-panel="cat3">// Контент и визуал</button>
+        <button class="stab" data-panel="cat4">// Разработка</button>
+        <button class="stab" data-panel="cat5">// Интеграция</button>
       </div>
 
       <!-- CAT 1 -->
@@ -813,16 +836,16 @@ footer {
         </div>
         <div class="srv-row">
           <div class="srv-num">01</div>
-          <div><div class="srv-name">AI-ответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito по API</div></div>
+          <div><div class="srv-name">AI-ответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
           <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
-          <div class="srv-stack">Claude + Make<br>+ WB/Ozon API</div>
+          <div class="srv-stack">Claude + Make<br>+ WB API</div>
           <div class="srv-price">$150–300</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">02</div>
-          <div><div class="srv-name">Оптимизация карточек</div><div class="srv-desc-small">SEO · описания · инфографика</div></div>
-          <div class="srv-desc">AI переписывает тексты и ключи. ChatGPT Vision анализирует фото. Nano Banana создаёт инфографику</div>
-          <div class="srv-stack">Claude + ChatGPT<br>+ Nano Banana</div>
+          <div><div class="srv-name">Оптимизация карточек товаров</div><div class="srv-desc-small">SEO · описания · инфографика</div></div>
+          <div class="srv-desc">AI переписывает SEO-тексты. Nano Banana создаёт инфографику под WB/Ozon</div>
+          <div class="srv-stack">Claude<br>+ Nano Banana</div>
           <div class="srv-price">$200–400</div>
         </div>
         <div class="srv-row">
@@ -835,16 +858,9 @@ footer {
         <div class="srv-row">
           <div class="srv-num">04</div>
           <div><div class="srv-name">Видеокарточки WB/Ozon</div><div class="srv-desc-small">5–8 сек ролик из фото товара</div></div>
-          <div class="srv-desc">Google Flow создаёт видео из фото и описания. Формат WB/Ozon Video. Без съёмки, без дизайнера</div>
+          <div class="srv-desc">Google Flow создаёт видео из фото товара. Формат WB/Ozon Video. Без съёмки, без дизайнера</div>
           <div class="srv-stack">Google Flow<br>+ Make</div>
           <div class="srv-price">$250–500</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">05</div>
-          <div><div class="srv-name">Рекламные баннеры</div><div class="srv-desc-small">4K · русский текст · под акции</div></div>
-          <div class="srv-desc">Nano Banana Pro генерирует баннеры под 11.11, НГ, Чёрную пятницу. Автоматически по расписанию</div>
-          <div class="srv-stack">Nano Banana Pro</div>
-          <div class="srv-price">$150–250</div>
         </div>
       </div>
 
@@ -858,30 +874,30 @@ footer {
           <div class="srv-col-head" style="text-align:right">Цена/мес</div>
         </div>
         <div class="srv-row">
-          <div class="srv-num">06</div>
+          <div class="srv-num">05</div>
           <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
-          <div class="srv-desc">Заявка с любого канала → AI квалифицирует → создаёт сделку в CRM → уведомляет менеджера</div>
-          <div class="srv-stack">Make + Claude<br>+ B24/amoCRM</div>
+          <div class="srv-desc">Заявка → AI квалифицирует → сделка в CRM → уведомление. 24/7</div>
+          <div class="srv-stack">Make + Claude<br>+ B24</div>
           <div class="srv-price">$200–400</div>
         </div>
         <div class="srv-row">
-          <div class="srv-num">07</div>
+          <div class="srv-num">06</div>
           <div><div class="srv-name">Автоматические КП</div><div class="srv-desc-small">Персональное КП за 30 секунд</div></div>
-          <div class="srv-desc">Менеджер нажимает кнопку — AI читает сделку через B24 MCP и пишет персональное КП</div>
-          <div class="srv-stack">Claude + B24 MCP<br>+ Make</div>
+          <div class="srv-desc">1 кнопка → AI читает сделку → персональное КП за 30 секунд</div>
+          <div class="srv-stack">Claude + B24 MCP</div>
           <div class="srv-price">$300–500</div>
         </div>
         <div class="srv-row">
-          <div class="srv-num">08</div>
+          <div class="srv-num">07</div>
           <div><div class="srv-name">Аналитика воронки продаж</div><div class="srv-desc-small">Еженедельный отчёт директору</div></div>
-          <div class="srv-desc">Автоматический отчёт по конверсиям, узким местам и рекомендациям. Без отдельного аналитика</div>
+          <div class="srv-desc">Еженедельный отчёт: конверсии, узкие места, рекомендации директору</div>
           <div class="srv-stack">Make + CRM API<br>+ Claude</div>
           <div class="srv-price">$200–350</div>
         </div>
         <div class="srv-row">
-          <div class="srv-num">09</div>
-          <div><div class="srv-name">AI-ответы на Avito</div><div class="srv-desc-small">Сообщение → ответ → уведомление</div></div>
-          <div class="srv-desc">Входящее сообщение → Claude квалифицирует клиента → шаблонный ответ → уведомление менеджеру</div>
+          <div class="srv-num">08</div>
+          <div><div class="srv-name">AI-ответы в Avito / Telegram</div><div class="srv-desc-small">Сообщение → квалификация → ответ</div></div>
+          <div class="srv-desc">Сообщение → квалификация → ответ → уведомление менеджеру</div>
           <div class="srv-stack">Make + Claude<br>+ Avito API</div>
           <div class="srv-price">$150–300</div>
         </div>
@@ -897,25 +913,98 @@ footer {
           <div class="srv-col-head" style="text-align:right">Цена/мес</div>
         </div>
         <div class="srv-row">
-          <div class="srv-num">10</div>
-          <div><div class="srv-name">AI-контент для соцсетей</div><div class="srv-desc-small">VK · автопостинг · по расписанию</div></div>
-          <div class="srv-desc">Make по расписанию → Claude пишет пост → Nano Banana делает картинку → автопостинг в VK</div>
-          <div class="srv-stack">Claude + Nano Banana<br>+ VK API</div>
+          <div class="srv-num">09</div>
+          <div><div class="srv-name">AI-контент для VK/Telegram</div><div class="srv-desc-small">Автопостинг · по расписанию</div></div>
+          <div class="srv-desc">Claude пишет → Nano Banana рисует → Make публикует по расписанию</div>
+          <div class="srv-stack">Claude + Nano Banana<br>+ VK</div>
           <div class="srv-price">$200–350</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">10</div>
+          <div><div class="srv-name">Рекламные баннеры + видео</div><div class="srv-desc-small">4K баннеры · видеоролики</div></div>
+          <div class="srv-desc">Nano Banana Pro — 4K баннеры. Google Flow — видеоролики. Без дизайнера</div>
+          <div class="srv-stack">Nano Banana<br>+ Google Flow</div>
+          <div class="srv-price">$200–400</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">11</div>
-          <div><div class="srv-name">Лендинг под акцию</div><div class="srv-desc-small">Страница за 1–2 дня без дизайнера</div></div>
-          <div class="srv-desc">Tilda Business + Nano Banana визуалы + Google Stitch мокап. Готово за 1–2 дня, не за 2 недели</div>
-          <div class="srv-stack">Tilda + Nano Banana<br>+ Google Stitch</div>
-          <div class="srv-price">от $200</div>
+          <div><div class="srv-name">AI-автоматизация для отелей</div><div class="srv-desc-small">Bnovo · репутация · лояльность</div></div>
+          <div class="srv-desc">Bnovo API: welcome-сообщения, отзывы, программа лояльности</div>
+          <div class="srv-stack">Make + Bnovo<br>+ Claude</div>
+          <div class="srv-price">$200–400</div>
+        </div>
+      </div>
+
+      <!-- CAT 4 -->
+      <div class="services-panel" id="cat4">
+        <div class="srv-header">
+          <div class="srv-col-head">#</div>
+          <div class="srv-col-head">Услуга</div>
+          <div class="srv-col-head">Что делает агент</div>
+          <div class="srv-col-head">Стек</div>
+          <div class="srv-col-head" style="text-align:right">Цена</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">12</div>
-          <div><div class="srv-name">Аналитика и отчёты</div><div class="srv-desc-small">Яндекс Директ · Метрика</div></div>
-          <div class="srv-desc">Яндекс Директ/Метрика → Make → Claude анализирует → еженедельный отчёт с конкретными рекомендациями</div>
-          <div class="srv-stack">Make + Яндекс API<br>+ Claude</div>
-          <div class="srv-price">$200–350</div>
+          <div><div class="srv-name">Telegram Mini App под бизнес</div><div class="srv-desc-small">Магазин · запись · каталог · лояльность</div></div>
+          <div class="srv-desc">Заменяет мобильное приложение. Магазин, запись, каталог, программа лояльности в Telegram</div>
+          <div class="srv-stack">Claude Code<br>+ Stitch + TG</div>
+          <div class="srv-price">от $500<br>+ $150/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">13</div>
+          <div><div class="srv-name">AI-бот Telegram / WhatsApp</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
+          <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
+          <div class="srv-stack">Claude API<br>+ Make + TG Bot</div>
+          <div class="srv-price">от $300<br>+ $100/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">14</div>
+          <div><div class="srv-name">Лендинг / сайт с AI-воронкой</div><div class="srv-desc-small">AI-чат · квалификация лида · CRM</div></div>
+          <div class="srv-desc">Tilda с AI-чатом, квалификацией лида и передачей в CRM. Воронка под ключ</div>
+          <div class="srv-stack">Tilda + Stitch<br>+ Claude + Make</div>
+          <div class="srv-price">от $400</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">15</div>
+          <div><div class="srv-name">TMA под акцию / событие</div><div class="srv-desc-small">Квиз · розыгрыш · Telegram Stars</div></div>
+          <div class="srv-desc">Квиз, розыгрыш, анкета со Telegram Stars оплатой. Под сезонные акции</div>
+          <div class="srv-stack">Claude Code<br>+ Nano Banana</div>
+          <div class="srv-price">от $350</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">16</div>
+          <div><div class="srv-name">AI-виджет для сайта</div><div class="srv-desc-small">Встраиваемый чат · квалификация</div></div>
+          <div class="srv-desc">Встраиваемый чат. Знает продукт, прайс. Квалифицирует лид и передаёт в CRM</div>
+          <div class="srv-stack">Claude API<br>+ Make + JS</div>
+          <div class="srv-price">от $200<br>+ $80/мес</div>
+        </div>
+      </div>
+
+      <!-- CAT 5 -->
+      <div class="services-panel" id="cat5">
+        <div class="srv-header">
+          <div class="srv-col-head">#</div>
+          <div class="srv-col-head">Услуга</div>
+          <div class="srv-col-head">Что делает агент</div>
+          <div class="srv-col-head">Стек</div>
+          <div class="srv-col-head" style="text-align:right">Цена/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">17</div>
+          <div><div class="srv-name">AI-интеграция под ключ</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
+          <div class="srv-desc">Аудит → карта автоматизаций → внедрение пакета агентов под специфику бизнеса. Весь стек AIWAY</div>
+          <div class="srv-stack">Весь стек<br>AIWAY</div>
+          <div class="srv-price">$500–1500</div>
+        </div>
+        <div style="padding:2rem 1.5rem;background:var(--cyan-dim);border:1px solid rgba(0,229,255,.15);border-top:none">
+          <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--cyan);letter-spacing:.12em;margin-bottom:.6rem">// ДЛЯ КОГО</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
+            <div style="font-size:.82rem;color:var(--sub);line-height:1.6"><span style="color:var(--head);font-weight:500">HR / Рекрутинг</span><br>Скрининг, онбординг<br><span style="color:var(--green);font-family:'Space Mono',monospace;font-size:.68rem">$400–800/мес</span></div>
+            <div style="font-size:.82rem;color:var(--sub);line-height:1.6"><span style="color:var(--head);font-weight:500">Юристы</span><br>Документы, договоры<br><span style="color:var(--green);font-family:'Space Mono',monospace;font-size:.68rem">$300–600/мес</span></div>
+            <div style="font-size:.82rem;color:var(--sub);line-height:1.6"><span style="color:var(--head);font-weight:500">Онлайн-школы</span><br>AI-куратор, TMA<br><span style="color:var(--green);font-family:'Space Mono',monospace;font-size:.68rem">$300–700/мес</span></div>
+            <div style="font-size:.82rem;color:var(--sub);line-height:1.6"><span style="color:var(--head);font-weight:500">Рестораны / Фитнес</span><br>TMA, запись, отзывы<br><span style="color:var(--green);font-family:'Space Mono',monospace;font-size:.68rem">$250–500/мес</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1065,19 +1154,6 @@ footer {
         <a href="#cta" class="btn-outline" style="justify-content:center">Начать →</a>
       </div>
 
-      <div class="pkg-card pkg-custom">
-        <div class="pkg-tier">TIER_04</div>
-        <div class="pkg-name" style="color:var(--cyan)">Кастом</div>
-        <div class="pkg-audience">Enterprise · индивидуально</div>
-        <div class="pkg-price" style="font-size:2rem;line-height:1.1">По<br>запросу</div>
-        <ul class="pkg-features">
-          <li>Любой набор услуг</li>
-          <li>SLA и договор</li>
-          <li>Выделенная команда</li>
-          <li>Интеграция с инфраструктурой</li>
-        </ul>
-        <a href="#cta" class="btn-outline" style="justify-content:center;border-color:rgba(0,229,255,.3);color:var(--cyan)">Обсудить →</a>
-      </div>
     </div>
   </div>
 </section>
@@ -1205,7 +1281,7 @@ footer {
         <a href="#faq">FAQ</a>
       </div>
       <div class="footer-meta">
-        AIWAY.AGENCY · AI-агенты для бизнеса СНГ<br>
+        AIWAY.AGENCY · 17 услуг · 8 ниш · Brand v3.2<br>
         © 2025 · <span style="color:var(--cyan)">24/7</span> · Рынок СНГ
       </div>
     </div>
