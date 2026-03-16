@@ -1255,7 +1255,8 @@ async function handleSubmit(e) {
   try {
     await fetch('https://hook.eu1.make.com/w0rzwqetf2gfdz0uqe6t7bcg9xdg', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(data)
     });
     form.style.display = 'none';
