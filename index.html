@@ -574,26 +574,88 @@ footer {
   .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
 }
 @media(max-width: 640px) {
-  section { padding: 5rem 0; }
+  /* ── ОБЩЕЕ ── */
+  section { padding: 4rem 0; }
+
+  /* ── НАВБАР ── */
   .nav-links { display: none; }
-  .hero-headline { font-size: clamp(3.5rem, 16vw, 6rem); }
+  nav { padding: 0 1rem; }
+  .nav-logo { font-size: 1rem; }
+  .nav-tagline { font-size: .5rem; }
+  .nav-cta { font-size: .65rem; padding: .5rem .8rem; letter-spacing: .05em; }
+
+  /* ── HERO ── */
+  #hero { padding: 6rem 1rem 3rem; }
+  .hero-headline { font-size: clamp(3.2rem, 15vw, 5rem); }
+  .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-trust { justify-self: start; width: 100%; gap: .75rem; }
+  .hero-trust-item { font-size: .8rem; }
+  .hero-actions { flex-direction: column; gap: .75rem; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100%; justify-content: center; }
+
+  /* ── НИШИ ── */
   .niches-grid { grid-template-columns: 1fr; }
-  .cases-grid { grid-template-columns: 1fr; }
-  .services-tabs { flex-wrap: wrap; }
+  .niche-card { padding: 1.5rem; }
+  .niche-title { font-size: 1.1rem; }
+  .niche-desc { font-size: .85rem; }
+  .niche-list li { font-size: .8rem; }
+  .niche-clients-list { font-size: .7rem; }
+
+  /* ── УСЛУГИ ── */
+  .services-tabs { flex-wrap: wrap; gap: .4rem; }
+  .stab { font-size: .6rem; padding: .4rem .6rem; letter-spacing: .03em; }
+  .srv-header, .srv-row { grid-template-columns: 1fr auto auto; gap: .5rem; }
+  .srv-num { display: none; }
+  .srv-col-head:first-child { display: none; }
+  .srv-col-head:nth-child(3) { display: none; }
+  .srv-col-head:nth-child(4),
+  .srv-col-head:nth-child(5) { display: block; font-size: .55rem; padding-left: 0; text-align: right; }
+  .srv-desc { display: none; }
+  .srv-name { font-size: .85rem; }
+  .srv-desc-small { font-size: .65rem; }
+  .srv-row .srv-price { display: block; font-size: .7rem; text-align: right; padding-left: 0; }
+
+  /* ── КАК РАБОТАЕМ ── */
   .steps { grid-template-columns: 1fr; }
-  .step { border-right: 1px solid var(--line) !important; }
+  .step { border-right: 1px solid var(--line) !important; padding: 1.5rem; }
   .step:first-child { border-top: 1px solid var(--line); }
   .step:not(:first-child) { border-top: none; }
+  .step-title { font-size: 1.1rem; }
+  .step-desc { font-size: .85rem; }
+  .step-tag { font-size: .6rem; }
+
+  /* ── КЕЙСЫ ── */
+  .cases-grid { grid-template-columns: 1fr; }
+  .case-card { padding: 1.5rem; }
+  .case-niche { font-size: .6rem; }
+  .case-label { font-size: .78rem; }
+
+  /* ── ВОПРОСЫ ── */
+  .faq-q { padding: 1.2rem 1.2rem; }
+  .faq-q-text { font-size: .9rem; }
+  .faq-a { font-size: .85rem; padding: 0 1.2rem 1.2rem; }
+
+  /* ── ФОРМА CTA ── */
+  .cta-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .cta-title { font-size: clamp(2rem, 10vw, 3rem); }
+  .cta-box { padding: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
+  .consent-text { font-size: .6rem; }
+
+  /* ── ПОДВАЛ ── */
+  .footer-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
+  .footer-links { justify-content: center; flex-wrap: wrap; gap: .75rem; }
   .footer-right { text-align: center; }
-  .footer-meta { text-align: center; }
-  .srv-header, .srv-row { grid-template-columns: 44px 1fr; }
-  .srv-col-head:nth-child(3),
-  .srv-col-head:nth-child(4),
-  .srv-col-head:nth-child(5),
-  .srv-desc, .srv-price { display: none; }
+  .footer-meta { text-align: center; font-size: .55rem; }
+  .footer-legal { font-size: .55rem; }
+  .footer-requisites { font-size: .55rem; }
+}
+
+/* ── Очень маленькие экраны ── */
+@media(max-width: 390px) {
+  .hero-headline { font-size: clamp(2.8rem, 14vw, 4rem); }
+  .nav-cta { display: none; }
 }
 </style>
 </head>
