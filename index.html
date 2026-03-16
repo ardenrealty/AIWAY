@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIWAY — AI-агенты для бизнеса 24/7</title>
+<meta name="description" content="Ваш бизнес работает на автопилоте. AI-агенты для WB/Ozon, недвижимости, отелей и CRM. Первый результат за 1–2 недели. Пилот бесплатно.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ──────────────────────────────────────
+   VARIABLES
+────────────────────────────────────── */
+:root {
+  --bg:        #080810;
+  --bg2:       #0D0D1A;
+  --bg3:       #12121F;
+  --line:      rgba(255,255,255,0.07);
+  --line2:     rgba(255,255,255,0.14);
+  --muted:     #4A4A6A;
+  --sub:       #7A7A9A;
+  --body-c:    #B0B0C8;
+  --head:      #E8E8F0;
+  --white:     #F0F0F8;
+  --cyan:      #00E5FF;
+  --cyan-dim:  rgba(0,229,255,0.06);
+  --cyan-mid:  rgba(0,229,255,0.15);
+  --green:     #00FF88;
+  --red:       #FF3B3B;
+}
+
+/* ──────────────────────────────────────
+   RESET
+────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--body-c);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ──────────────────────────────────────
+   AMBIENT LAYERS
+────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px
+  );
+}
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 75% at 65% 25%, rgba(0,0,0,.55) 0%, transparent 100%);
+}
+.hero-glow {
+  position: fixed; top: -15%; right: -10%;
+  width: 65vw; height: 65vw; max-width: 900px; max-height: 900px;
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse, rgba(0,229,255,.055) 0%, transparent 70%);
+}
+
+/* ──────────────────────────────────────
+   LAYOUT
+────────────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+section { padding: 7rem 0; position: relative; z-index: 1; }
+
+/* ──────────────────────────────────────
+   NAV
+────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 58px;
+  background: rgba(8,8,16,.96);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.35rem; letter-spacing: .14em;
+  color: var(--white); text-transform: uppercase; text-decoration: none;
+  display: flex; align-items: center; gap: .3rem;
+}
+.nav-logo-mark {
+  display: flex; gap: 3px; align-items: center; margin-right: .5rem;
+}
+.nav-logo-sq {
+  width: 7px; height: 7px; background: var(--muted);
+}
+.nav-logo-sq.accent { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+.nav-logo span { color: var(--cyan); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: .67rem;
+  color: var(--muted); text-decoration: none; letter-spacing: .1em;
+  text-transform: uppercase; transition: color .15s;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-cta {
+  font-family: 'Space Mono', monospace; font-size: .67rem;
+  background: var(--cyan) !important; color: #080810 !important;
+  padding: .45rem 1.1rem; letter-spacing: .08em;
+  text-transform: uppercase; font-weight: 700;
+  transition: opacity .15s !important;
+}
+.nav-cta:hover { opacity: .85; color: #080810 !important; }
+
+/* ──────────────────────────────────────
+   TAGS / LABELS
+────────────────────────────────────── */
+.tag {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Space Mono', monospace; font-size: .67rem;
+  color: var(--cyan); letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--cyan); }
+
+/* ──────────────────────────────────────
+   SECTION HEADINGS
+────────────────────────────────────── */
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: .93;
+  color: var(--white); margin-bottom: 1.2rem;
+  text-transform: uppercase; letter-spacing: -.01em;
+}
+.sec-title .dim { color: var(--muted); font-weight: 300; }
+.sec-sub { font-size: 1rem; line-height: 1.72; color: var(--sub); max-width: 580px; font-weight: 300; }
+
+.hr { width: 100%; height: 1px; background: var(--line); margin: 4rem 0; }
+
+/* ──────────────────────────────────────
+   BUTTONS
+────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--cyan); color: #080810;
+  font-family: 'Space Mono', monospace; font-size: .78rem;
+  font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: .95rem 2rem; text-decoration: none;
+  border: none; cursor: pointer;
+  transition: opacity .15s, transform .12s;
+}
+.btn-primary:hover { opacity: .86; transform: translateY(-1px); }
+.btn-primary::after { content: '→'; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: transparent; color: var(--sub);
+  font-family: 'Space Mono', monospace; font-size: .78rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .95rem 2rem; text-decoration: none;
+  border: 1px solid var(--line2); cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ──────────────────────────────────────
+   SCROLL REVEAL
+────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s, transform .65s; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+
+/* ══════════════════════════════════════
+   01 — HERO
+══════════════════════════════════════ */
+#hero-wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 3rem 5.5rem;
+}
+.hero-status {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  color: var(--sub); letter-spacing: .1em; margin-bottom: 2.8rem;
+}
+.hero-status::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+  animation: blink 2.2s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.hero-headline {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(4.5rem, 13vw, 12rem);
+  line-height: .87; letter-spacing: -.025em;
+  text-transform: uppercase; color: var(--white);
+  margin-bottom: 3.5rem;
+}
+.hero-headline .stroke {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,.18);
+  color: transparent;
+}
+.hero-headline .cyan { color: var(--cyan); }
+.hero-headline .accent-dot { color: var(--cyan); }
+
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 3rem; flex-wrap: wrap;
+}
+.hero-left { display: flex; flex-direction: column; gap: 1.6rem; max-width: 500px; }
+.hero-desc { font-size: 1.1rem; line-height: 1.72; color: var(--sub); font-weight: 300; }
+.hero-desc strong { color: var(--head); font-weight: 500; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.hero-metrics { display: flex; gap: 2.8rem; flex-wrap: wrap; }
+.metric { border-left: 1px solid var(--line2); padding-left: 1.6rem; }
+.metric-n {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 2.6rem; color: var(--white); line-height: 1; letter-spacing: -.025em;
+}
+.metric-n span { color: var(--cyan); }
+.metric-l {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .1em; margin-top: .35rem;
+  text-transform: uppercase; line-height: 1.5;
+}
+
+/* ══════════════════════════════════════
+   02 — TRUST BAR
+══════════════════════════════════════ */
+#trust { background: var(--bg2); padding: 0; }
+.trust-bar {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.trust-item {
+  padding: 2.2rem 1.8rem; border-right: 1px solid var(--line);
+  position: relative; overflow: hidden; transition: background .2s;
+}
+.trust-item:last-child { border-right: none; }
+.trust-item::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.trust-item:hover { background: rgba(0,229,255,.035); }
+.trust-item:hover::before { opacity: 1; }
+.trust-num {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 2.8rem; color: var(--white); line-height: 1; letter-spacing: -.025em;
+  margin-bottom: .4rem;
+}
+.trust-num .u { color: var(--cyan); font-size: 1.6rem; }
+.trust-label {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .1em; line-height: 1.55;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   03 — NICHES
+══════════════════════════════════════ */
+#niches { background: var(--bg); }
+.niches-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3.5rem;
+}
+.niche-card {
+  padding: 2.2rem 1.8rem; background: var(--bg3);
+  border: 1px solid var(--line); position: relative; overflow: hidden;
+  transition: border-color .2s, background .2s;
+}
+.niche-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.niche-card:hover { background: rgba(0,229,255,.03); border-color: rgba(0,229,255,.18); }
+.niche-card:hover::before { opacity: 1; }
+.niche-icon { font-size: 1.8rem; margin-bottom: 1.1rem; }
+.niche-name {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 1.2rem; color: var(--white); text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: .6rem;
+}
+.niche-pain { font-size: .83rem; color: var(--sub); line-height: 1.65; margin-bottom: 1.2rem; font-weight: 300; }
+.niche-price { font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--green); letter-spacing: .08em; }
+
+/* ══════════════════════════════════════
+   04 — SERVICES
+══════════════════════════════════════ */
+#services { background: var(--bg2); }
+.services-tabs {
+  display: flex; gap: 0; margin-top: 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.stab {
+  font-family: 'Space Mono', monospace; font-size: .68rem;
+  color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
+  padding: .85rem 1.6rem; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  background: none; border-top: none; border-left: none; border-right: none;
+  transition: color .15s, border-color .15s;
+}
+.stab:hover { color: var(--sub); }
+.stab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+
+.services-panel { display: none; }
+.services-panel.active { display: block; }
+
+.srv-header {
+  display: grid; grid-template-columns: 60px 1fr 1.3fr 160px 110px;
+  padding: .75rem 1.5rem; border-bottom: 1px solid var(--line2);
+}
+.srv-col-head {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
+}
+.srv-row {
+  display: grid; grid-template-columns: 60px 1fr 1.3fr 160px 110px;
+  padding: 1.4rem 1.5rem; border-bottom: 1px solid var(--line);
+  transition: background .15s; cursor: default;
+}
+.srv-row:hover { background: var(--bg3); }
+.srv-row:hover .srv-name { color: var(--cyan); }
+.srv-num { font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--muted); padding-top: .15rem; }
+.srv-name { font-weight: 600; color: var(--head); font-size: .92rem; margin-bottom: .28rem; transition: color .15s; }
+.srv-desc-small { font-size: .78rem; color: var(--muted); font-weight: 300; }
+.srv-desc { font-size: .82rem; color: var(--sub); line-height: 1.55; font-weight: 300; }
+.srv-stack { font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--muted); line-height: 1.6; }
+.srv-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--green); text-align: right; letter-spacing: .02em; }
+
+/* ══════════════════════════════════════
+   05 — HOW IT WORKS
+══════════════════════════════════════ */
+#how { background: var(--bg); }
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 3.5rem;
+}
+.step {
+  padding: 2.8rem 2.2rem; border: 1px solid var(--line);
+  border-right: none; position: relative; overflow: hidden;
+}
+.step:last-child { border-right: 1px solid var(--line); }
+.step-bg-num {
+  position: absolute; bottom: -.5rem; right: 1rem;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 7rem; color: rgba(255,255,255,.03); line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.step-tag {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--cyan); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 1.4rem; color: var(--white); text-transform: uppercase;
+  letter-spacing: .02em; margin-bottom: .8rem; line-height: 1.1;
+}
+.step-desc { font-size: .85rem; color: var(--sub); line-height: 1.68; font-weight: 300; }
+.step-time {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--green); letter-spacing: .1em; margin-top: 1.4rem;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   06 — CASES
+══════════════════════════════════════ */
+#cases { background: var(--bg2); }
+.cases-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3.5rem;
+}
+.case-card {
+  padding: 2.5rem 2rem; background: var(--bg3);
+  border: 1px solid var(--line); position: relative; overflow: hidden;
+  transition: border-color .2s;
+}
+.case-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.case-card:hover { border-color: var(--line2); }
+.case-card:hover::before { opacity: 1; }
+.case-niche {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.case-pain {
+  font-size: .83rem; color: var(--sub); line-height: 1.65;
+  margin-bottom: 1.6rem; padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line); font-weight: 300;
+}
+.case-pain strong { color: var(--head); font-weight: 500; }
+.case-metric-big {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 3.8rem; color: var(--white); line-height: .9;
+  letter-spacing: -.025em; margin-bottom: .5rem;
+}
+.case-metric-big span { color: var(--cyan); }
+.case-label { font-size: .82rem; color: var(--sub); line-height: 1.6; font-weight: 300; margin-bottom: .8rem; }
+.case-label strong { color: var(--head); font-weight: 500; }
+.case-badge {
+  display: inline-block; font-family: 'Space Mono', monospace;
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .25rem .85rem;
+  background: rgba(0,255,136,.08); color: var(--green);
+  border: 1px solid rgba(0,255,136,.2);
+}
+
+/* ══════════════════════════════════════
+   07 — PACKAGES
+══════════════════════════════════════ */
+#packages { background: var(--bg); }
+.pkg-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3.5rem;
+}
+.pkg-card {
+  padding: 2.5rem 2rem; background: var(--bg3);
+  border: 1px solid var(--line); position: relative;
+  display: flex; flex-direction: column;
+}
+.pkg-card.featured {
+  background: var(--bg2); border-color: rgba(0,229,255,.3);
+}
+.pkg-card.featured::before {
+  content: 'РЕКОМЕНДУЕМ';
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--cyan); color: #080810;
+  font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: .1em;
+  padding: .28rem .9rem; white-space: nowrap; font-weight: 700;
+}
+.pkg-custom {
+  background: var(--cyan-dim) !important; border-color: rgba(0,229,255,.15) !important;
+}
+.pkg-tier {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--muted); letter-spacing: .12em; margin-bottom: 1rem;
+}
+.pkg-name {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 1.8rem; color: var(--white); text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: .3rem;
+}
+.pkg-audience { font-size: .78rem; color: var(--sub); margin-bottom: 1.8rem; font-weight: 300; }
+.pkg-price {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 2.9rem; color: var(--white); line-height: 1;
+  letter-spacing: -.025em; margin-bottom: 1.6rem;
+}
+.pkg-price span { font-size: .88rem; color: var(--muted); font-weight: 400; }
+.pkg-features {
+  list-style: none; display: flex; flex-direction: column;
+  gap: .68rem; margin-bottom: 2rem; flex: 1;
+}
+.pkg-features li {
+  font-size: .82rem; color: var(--sub); display: flex;
+  gap: .65rem; line-height: 1.45; font-weight: 300;
+}
+.pkg-features li::before {
+  content: '→'; color: var(--cyan); flex-shrink: 0;
+  font-family: 'Space Mono', monospace; font-size: .68rem; margin-top: .05rem;
+}
+.pkg-card.featured .pkg-features li { color: var(--body-c); }
+
+/* ══════════════════════════════════════
+   08 — FAQ
+══════════════════════════════════════ */
+#faq { background: var(--bg2); }
+.faq-list { margin-top: 3.5rem; }
+.faq-item { border: 1px solid var(--line); border-bottom: none; overflow: hidden; }
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 2rem; cursor: pointer; transition: background .15s;
+  background: none; width: 100%; text-align: left; border: none;
+}
+.faq-q:hover { background: rgba(255,255,255,.02); }
+.faq-q-text { font-weight: 600; color: var(--head); font-size: .94rem; }
+.faq-icon {
+  font-family: 'Space Mono', monospace; font-size: 1rem;
+  color: var(--cyan); transition: transform .3s; flex-shrink: 0; margin-left: 1rem;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  display: none; padding: 0 2rem 1.6rem 2rem;
+  font-size: .88rem; color: var(--sub); line-height: 1.72; font-weight: 300;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ══════════════════════════════════════
+   09 — CTA + FORM
+══════════════════════════════════════ */
+#cta { background: var(--bg); }
+.cta-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(2.1rem, 3.8vw, 3.4rem); line-height: .93;
+  color: var(--white); text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.cta-title .cyan { color: var(--cyan); }
+.cta-sub { font-size: .92rem; color: var(--sub); line-height: 1.72; font-weight: 300; }
+.cta-sub strong { color: var(--head); font-weight: 500; }
+.cta-bullets { margin-top: 2rem; display: flex; flex-direction: column; gap: .85rem; }
+.cta-bullet { display: flex; gap: .85rem; align-items: center; }
+.bullet-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0;
+}
+.cta-bullet span { font-size: .85rem; color: var(--sub); font-weight: 300; }
+
+.cta-box { background: var(--bg2); border: 1px solid var(--line2); padding: 2.6rem; }
+.cta-box-label {
+  font-family: 'Space Mono', monospace; font-size: .63rem;
+  color: var(--cyan); letter-spacing: .14em; margin-bottom: 1.6rem; text-transform: uppercase;
+}
+.cta-form { display: flex; flex-direction: column; gap: .85rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.form-input {
+  width: 100%; background: var(--bg3); border: 1px solid var(--line2);
+  color: var(--head); font-family: 'Barlow', sans-serif; font-size: .92rem;
+  padding: .9rem 1.1rem; outline: none; transition: border-color .15s;
+}
+.form-input::placeholder { color: var(--muted); }
+.form-input:focus { border-color: var(--cyan); }
+.form-submit {
+  background: var(--cyan); color: #080810;
+  font-family: 'Space Mono', monospace; font-size: .78rem;
+  font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: .95rem 2rem; border: none; cursor: pointer; width: 100%;
+  transition: opacity .15s; display: flex; align-items: center; justify-content: center; gap: .5rem;
+}
+.form-submit:hover { opacity: .86; }
+.form-submit:disabled { opacity: .5; cursor: default; }
+.form-divider {
+  display: flex; align-items: center; gap: 1rem;
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .1em;
+}
+.form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.btn-telegram {
+  display: flex; align-items: center; justify-content: center; gap: .7rem;
+  background: transparent; border: 1px solid var(--line2);
+  color: var(--sub); font-family: 'Space Mono', monospace; font-size: .72rem;
+  letter-spacing: .08em; text-transform: uppercase; padding: .9rem;
+  cursor: pointer; text-decoration: none; transition: border-color .15s, color .15s;
+}
+.btn-telegram:hover { border-color: rgba(0,229,255,.35); color: var(--head); }
+.form-note {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .06em; text-align: center; line-height: 1.65;
+}
+.form-note span { color: var(--green); }
+#successMsg {
+  display: none; text-align: center; padding: 2.5rem 1rem;
+}
+#successMsg .success-big {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 2rem; color: var(--white); text-transform: uppercase; margin-bottom: .8rem;
+}
+#successMsg .success-sub {
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  color: var(--green); letter-spacing: .1em;
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: var(--bg); border-top: 1px solid var(--line); padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 2rem;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 1.25rem; letter-spacing: .14em; text-transform: uppercase; color: var(--white);
+}
+.footer-logo span { color: var(--cyan); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--muted); text-decoration: none; letter-spacing: .08em;
+  text-transform: uppercase; transition: color .15s;
+}
+.footer-links a:hover { color: var(--sub); }
+.footer-meta {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .06em; text-align: right; line-height: 1.72;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width: 1100px) {
+  .pkg-grid { grid-template-columns: repeat(2, 1fr); }
+  .niches-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-bar { grid-template-columns: repeat(3, 1fr); }
+  .trust-item:nth-child(3n) { border-right: none; }
+  .trust-item:nth-child(4),
+  .trust-item:nth-child(5) { border-top: 1px solid var(--line); }
+  .srv-header, .srv-row { grid-template-columns: 52px 1fr 1.3fr 100px; }
+  .srv-col-head:last-child, .srv-price { display: none; }
+}
+@media(max-width: 900px) {
+  .container, nav, #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .step:nth-child(2) { border-right: 1px solid var(--line); }
+  .step:nth-child(3) { border-top: none; }
+  .step:nth-child(4) { border-right: 1px solid var(--line); border-top: none; }
+  .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media(max-width: 640px) {
+  section { padding: 5rem 0; }
+  .nav-links { display: none; }
+  .hero-headline { font-size: clamp(3.5rem, 16vw, 6rem); }
+  .hero-metrics { gap: 1.5rem; }
+  .trust-bar { grid-template-columns: repeat(2, 1fr); }
+  .trust-item:nth-child(2n) { border-right: none; }
+  .trust-item:nth-child(3),
+  .trust-item:nth-child(4),
+  .trust-item:nth-child(5) { border-top: 1px solid var(--line); }
+  .niches-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .pkg-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .step { border-right: 1px solid var(--line) !important; }
+  .step:first-child { border-top: 1px solid var(--line); }
+  .step:not(:first-child) { border-top: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+  .footer-meta { text-align: center; }
+  .srv-header, .srv-row { grid-template-columns: 44px 1fr; }
+  .srv-col-head:nth-child(3),
+  .srv-col-head:nth-child(4),
+  .srv-col-head:nth-child(5),
+  .srv-desc, .srv-stack, .srv-price { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="hero-glow"></div>
+
+<!-- ════════════════════════
+     NAV
+════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <div class="nav-logo-sq"></div>
+      <div class="nav-logo-sq"></div>
+      <div class="nav-logo-sq accent"></div>
+    </div>
+    AI<span>WAY</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#niches">Ниши</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#how">Процесс</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#packages">Цены</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#cta" class="nav-cta">Получить пилот</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════
+     01 — HERO
+════════════════════════ -->
+<div id="hero-wrap">
+  <section id="hero">
+    <div class="hero-status">AIWAY.AGENCY &mdash; AI-АГЕНТЫ ДЛЯ БИЗНЕСА · 24/7 · СНГ</div>
+    <div class="hero-headline">
+      <div>ПОКА</div>
+      <div class="stroke">КОНКУРЕНТЫ</div>
+      <div>ДУМАЮТ<span class="accent-dot">.</span></div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-left">
+        <p class="hero-desc">
+          <strong>Ваш бизнес работает на автопилоте.</strong> AI-агенты берут рутину на себя — отвечают на отзывы, обрабатывают заявки, мониторят конкурентов. Никакого жаргона — только результат в цифрах.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn-primary">Получить пилот бесплатно</a>
+          <a href="#cases" class="btn-outline">Смотреть кейсы</a>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-n" data-count="47">47<span>+</span></div>
+          <div class="metric-l">Агентов<br>в работе</div>
+        </div>
+        <div class="metric">
+          <div class="metric-n">3<span>мин</span></div>
+          <div class="metric-l">100% отзывов<br>закрыты</div>
+        </div>
+        <div class="metric">
+          <div class="metric-n" data-count="18">18<span>ч</span></div>
+          <div class="metric-l">В неделю<br>экономим</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════
+     02 — TRUST BAR
+════════════════════════ -->
+<section id="trust">
+  <div class="container">
+    <div class="trust-bar reveal">
+      <div class="trust-item">
+        <div class="trust-num">12<span class="u">+</span></div>
+        <div class="trust-label">Клиентов<br>на подписке</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">100<span class="u">%</span></div>
+        <div class="trust-label">Отзывов закрыты<br>за 3 минуты</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">24<span class="u">/7</span></div>
+        <div class="trust-label">Агенты работают<br>без остановок</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">1–2</div>
+        <div class="trust-label">Недели до<br>первого результата</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">$0</div>
+        <div class="trust-label">За пилот —<br>оцените до оплаты</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     03 — NICHES
+════════════════════════ -->
+<section id="niches">
+  <div class="container">
+    <div class="tag reveal">03 // Для кого</div>
+    <h2 class="sec-title reveal">ВАША НИША —<br><span class="dim">ВАША БОЛЬ.</span></h2>
+    <p class="sec-sub reveal">Узнайте себя. Каждая категория — конкретная задача с конкретной ценой. Не «внедрение AI».</p>
+
+    <div class="niches-grid reveal">
+      <div class="niche-card">
+        <div class="niche-icon">📦</div>
+        <div class="niche-name">WB / Ozon</div>
+        <div class="niche-pain">Карточки не работают. Сотни отзывов висят без ответа. Конкуренты непонятно как обходят вас в поиске каждую неделю.</div>
+        <div class="niche-price">от $150/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏠</div>
+        <div class="niche-name">Недвижимость</div>
+        <div class="niche-pain">Сотни объявлений на Avito. Лиды теряются — не успеваете отвечать. Ручная работа съедает 3–4 часа ежедневно.</div>
+        <div class="niche-price">от $200/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏨</div>
+        <div class="niche-name">Отели</div>
+        <div class="niche-pain">Репутация не управляется. Гости уходят без welcome-сообщений. Негативные отзывы остаются без ответа неделями.</div>
+        <div class="niche-price">от $200/мес</div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏢</div>
+        <div class="niche-name">B2B / CRM</div>
+        <div class="niche-pain">Лиды теряются в Bitrix24. КП пишется вручную часами. Менеджеры не успевают. Нет аналитики по воронке.</div>
+        <div class="niche-price">от $200/мес</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     04 — SERVICES
+════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="tag reveal">04 // Услуги</div>
+    <h2 class="sec-title reveal">12 УСЛУГ.<br><span class="dim">3 КАТЕГОРИИ.</span></h2>
+    <p class="sec-sub reveal">Каждая услуга — результат, не процесс. «Отзывы отвечают сами», а не «интеграция WB API».</p>
+
+    <div class="reveal">
+      <div class="services-tabs">
+        <button class="stab active" data-panel="cat1">// Маркетплейсы</button>
+        <button class="stab" data-panel="cat2">// Продажи и CRM</button>
+        <button class="stab" data-panel="cat3">// Контент и визуал</button>
+      </div>
+
+      <!-- CAT 1 -->
+      <div class="services-panel active" id="cat1">
+        <div class="srv-header">
+          <div class="srv-col-head">#</div>
+          <div class="srv-col-head">Услуга</div>
+          <div class="srv-col-head">Что делает агент</div>
+          <div class="srv-col-head">Стек</div>
+          <div class="srv-col-head" style="text-align:right">Цена/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">01</div>
+          <div><div class="srv-name">AI-ответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito по API</div></div>
+          <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
+          <div class="srv-stack">Claude + Make<br>+ WB/Ozon API</div>
+          <div class="srv-price">$150–300</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">02</div>
+          <div><div class="srv-name">Оптимизация карточек</div><div class="srv-desc-small">SEO · описания · инфографика</div></div>
+          <div class="srv-desc">AI переписывает тексты и ключи. ChatGPT Vision анализирует фото. Nano Banana создаёт инфографику</div>
+          <div class="srv-stack">Claude + ChatGPT<br>+ Nano Banana</div>
+          <div class="srv-price">$200–400</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">03</div>
+          <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Ежедневный отчёт в Telegram</div></div>
+          <div class="srv-desc">Apify парсит цены и позиции. Claude анализирует тренды. Отчёт каждое утро в Telegram</div>
+          <div class="srv-stack">Apify + Claude<br>+ Make</div>
+          <div class="srv-price">$200–350</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">04</div>
+          <div><div class="srv-name">Видеокарточки WB/Ozon</div><div class="srv-desc-small">5–8 сек ролик из фото товара</div></div>
+          <div class="srv-desc">Google Flow создаёт видео из фото и описания. Формат WB/Ozon Video. Без съёмки, без дизайнера</div>
+          <div class="srv-stack">Google Flow<br>+ Make</div>
+          <div class="srv-price">$250–500</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">05</div>
+          <div><div class="srv-name">Рекламные баннеры</div><div class="srv-desc-small">4K · русский текст · под акции</div></div>
+          <div class="srv-desc">Nano Banana Pro генерирует баннеры под 11.11, НГ, Чёрную пятницу. Автоматически по расписанию</div>
+          <div class="srv-stack">Nano Banana Pro</div>
+          <div class="srv-price">$150–250</div>
+        </div>
+      </div>
+
+      <!-- CAT 2 -->
+      <div class="services-panel" id="cat2">
+        <div class="srv-header">
+          <div class="srv-col-head">#</div>
+          <div class="srv-col-head">Услуга</div>
+          <div class="srv-col-head">Что делает агент</div>
+          <div class="srv-col-head">Стек</div>
+          <div class="srv-col-head" style="text-align:right">Цена/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">06</div>
+          <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
+          <div class="srv-desc">Заявка с любого канала → AI квалифицирует → создаёт сделку в CRM → уведомляет менеджера</div>
+          <div class="srv-stack">Make + Claude<br>+ B24/amoCRM</div>
+          <div class="srv-price">$200–400</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">07</div>
+          <div><div class="srv-name">Автоматические КП</div><div class="srv-desc-small">Персональное КП за 30 секунд</div></div>
+          <div class="srv-desc">Менеджер нажимает кнопку — AI читает сделку через B24 MCP и пишет персональное КП</div>
+          <div class="srv-stack">Claude + B24 MCP<br>+ Make</div>
+          <div class="srv-price">$300–500</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">08</div>
+          <div><div class="srv-name">Аналитика воронки продаж</div><div class="srv-desc-small">Еженедельный отчёт директору</div></div>
+          <div class="srv-desc">Автоматический отчёт по конверсиям, узким местам и рекомендациям. Без отдельного аналитика</div>
+          <div class="srv-stack">Make + CRM API<br>+ Claude</div>
+          <div class="srv-price">$200–350</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">09</div>
+          <div><div class="srv-name">AI-ответы на Avito</div><div class="srv-desc-small">Сообщение → ответ → уведомление</div></div>
+          <div class="srv-desc">Входящее сообщение → Claude квалифицирует клиента → шаблонный ответ → уведомление менеджеру</div>
+          <div class="srv-stack">Make + Claude<br>+ Avito API</div>
+          <div class="srv-price">$150–300</div>
+        </div>
+      </div>
+
+      <!-- CAT 3 -->
+      <div class="services-panel" id="cat3">
+        <div class="srv-header">
+          <div class="srv-col-head">#</div>
+          <div class="srv-col-head">Услуга</div>
+          <div class="srv-col-head">Что делает агент</div>
+          <div class="srv-col-head">Стек</div>
+          <div class="srv-col-head" style="text-align:right">Цена/мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">10</div>
+          <div><div class="srv-name">AI-контент для соцсетей</div><div class="srv-desc-small">VK · автопостинг · по расписанию</div></div>
+          <div class="srv-desc">Make по расписанию → Claude пишет пост → Nano Banana делает картинку → автопостинг в VK</div>
+          <div class="srv-stack">Claude + Nano Banana<br>+ VK API</div>
+          <div class="srv-price">$200–350</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">11</div>
+          <div><div class="srv-name">Лендинг под акцию</div><div class="srv-desc-small">Страница за 1–2 дня без дизайнера</div></div>
+          <div class="srv-desc">Tilda Business + Nano Banana визуалы + Google Stitch мокап. Готово за 1–2 дня, не за 2 недели</div>
+          <div class="srv-stack">Tilda + Nano Banana<br>+ Google Stitch</div>
+          <div class="srv-price">от $200</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">12</div>
+          <div><div class="srv-name">Аналитика и отчёты</div><div class="srv-desc-small">Яндекс Директ · Метрика</div></div>
+          <div class="srv-desc">Яндекс Директ/Метрика → Make → Claude анализирует → еженедельный отчёт с конкретными рекомендациями</div>
+          <div class="srv-stack">Make + Яндекс API<br>+ Claude</div>
+          <div class="srv-price">$200–350</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     05 — HOW IT WORKS
+════════════════════════ -->
+<section id="how">
+  <div class="container">
+    <div class="tag reveal">05 // Как работаем</div>
+    <h2 class="sec-title reveal">4 ШАГА.<br><span class="dim">БЕЗ РИСКА.</span></h2>
+    <p class="sec-sub reveal">Пилот до подписки — оцените результат на своих данных. Только потом решайте продолжать.</p>
+
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-bg-num">01</div>
+        <div class="step-tag">// АУДИТ</div>
+        <div class="step-title">Разбор<br>за 30 минут</div>
+        <div class="step-desc">Показываем сколько часов и денег теряет ваш бизнес прямо сейчас. Конкретные цифры по вашей нише. Без обязательств.</div>
+        <div class="step-time">БЕСПЛАТНО · 30 МИН</div>
+      </div>
+      <div class="step">
+        <div class="step-bg-num">02</div>
+        <div class="step-tag">// ПИЛОТ</div>
+        <div class="step-title">Первый агент<br>в деле</div>
+        <div class="step-desc">Запускаем одного агента на ваших реальных данных. Видите результат до оплаты подписки. Никакого «кота в мешке».</div>
+        <div class="step-time">1–2 НЕДЕЛИ</div>
+      </div>
+      <div class="step">
+        <div class="step-bg-num">03</div>
+        <div class="step-tag">// ПОДПИСКА</div>
+        <div class="step-title">Система<br>работает</div>
+        <div class="step-desc">Масштабируем до нужного числа агентов. Мониторинг 24/7 с нашей стороны. Еженедельные отчёты по метрикам.</div>
+        <div class="step-time">ОТ $150/МЕС</div>
+      </div>
+      <div class="step">
+        <div class="step-bg-num">04</div>
+        <div class="step-tag">// РОСТ</div>
+        <div class="step-title">Новые<br>направления</div>
+        <div class="step-desc">Каждый месяц добавляем новые автоматизации. Ваш рост — наш рост. Ретейнер-модель: уходить невыгодно обоим.</div>
+        <div class="step-time">ВАШИ АГЕНТЫ РАСТУТ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     06 — CASES
+════════════════════════ -->
+<section id="cases">
+  <div class="container">
+    <div class="tag reveal">06 // Кейсы</div>
+    <h2 class="sec-title reveal">РЕЗУЛЬТАТЫ<br><span class="dim">В ЦИФРАХ.</span></h2>
+    <p class="sec-sub reveal">Не «клиент доволен». До и после на реальных бизнесах.</p>
+
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-niche">// МАРКЕТПЛЕЙС · WB · ОДЕЖДА</div>
+        <div class="case-pain">
+          <strong>Боль:</strong> 340 отзывов в месяц — отвечали вручную 2–3 дня. Рейтинг падал, карточки опускались в поиске.
+        </div>
+        <div class="case-metric-big">32<span>%</span></div>
+        <div class="case-label">отзывов с ответом — было <strong>4%</strong></div>
+        <div class="case-label">Ответ на каждый отзыв за 2–3 минуты. Рейтинг вырос с 4.1 до 4.7 за 3 недели. Менеджер освободил <strong>18 часов в неделю.</strong></div>
+        <div class="case-badge">+18 ч/нед свободно</div>
+      </div>
+      <div class="case-card reveal reveal-d1">
+        <div class="case-niche">// НЕДВИЖИМОСТЬ · AVITO · МОСКВА</div>
+        <div class="case-pain">
+          <strong>Боль:</strong> 3 менеджера не успевали отвечать на Avito. Горячие лиды остывали без ответа за 30–40 минут.
+        </div>
+        <div class="case-metric-big">30<span>сек</span></div>
+        <div class="case-label">время первого ответа — было <strong>40 минут</strong></div>
+        <div class="case-label">AI квалифицирует и отвечает мгновенно. Менеджер получает готовый контекст. <strong>+23% конверсия в просмотр.</strong></div>
+        <div class="case-badge">+23% конверсия</div>
+      </div>
+      <div class="case-card reveal reveal-d2">
+        <div class="case-niche">// ОТЕЛЬ · BNOVO · 45 НОМЕРОВ</div>
+        <div class="case-pain">
+          <strong>Боль:</strong> 0% гостей получали welcome-сообщение. Негативные отзывы на Booking не закрывались неделями.
+        </div>
+        <div class="case-metric-big">100<span>%</span></div>
+        <div class="case-label">гостей получают welcome за <strong>5 минут</strong> после заезда</div>
+        <div class="case-label">Автоответы на все отзывы. Welcome-цепочка при заезде. <strong>Возвратность гостей +18%</strong> за 2 месяца.</div>
+        <div class="case-badge">+18% возвратность</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     07 — PACKAGES
+════════════════════════ -->
+<section id="packages">
+  <div class="container">
+    <div class="tag reveal">07 // Пакеты</div>
+    <h2 class="sec-title reveal">ПОДПИСКА.<br><span class="dim">НЕ ПРОЕКТ.</span></h2>
+    <p class="sec-sub reveal">Ретейнер-модель — не уходим после запуска. Агенты работают, мы следим, вы растёте.</p>
+
+    <div class="pkg-grid reveal">
+      <div class="pkg-card">
+        <div class="pkg-tier">TIER_01</div>
+        <div class="pkg-name">Старт</div>
+        <div class="pkg-audience">Малый бизнес · первый AI-агент</div>
+        <div class="pkg-price">$150<span>–250/мес</span></div>
+        <ul class="pkg-features">
+          <li>1–2 автоматизации под ключ</li>
+          <li>Мониторинг и поддержка</li>
+          <li>Отчёт раз в месяц</li>
+          <li>До 3 правок в месяц</li>
+          <li>Telegram-поддержка</li>
+        </ul>
+        <a href="#cta" class="btn-outline" style="justify-content:center">Начать →</a>
+      </div>
+
+      <div class="pkg-card featured">
+        <div class="pkg-tier">TIER_02</div>
+        <div class="pkg-name">Стандарт</div>
+        <div class="pkg-audience">Средний бизнес · полная автоматизация</div>
+        <div class="pkg-price">$350<span>–500/мес</span></div>
+        <ul class="pkg-features">
+          <li>3–5 AI-агентов в работе</li>
+          <li>Мониторинг 24/7</li>
+          <li>Еженедельный отчёт</li>
+          <li>До 8 правок в месяц</li>
+          <li>1 новая автоматизация/мес</li>
+          <li>Приоритетная поддержка</li>
+        </ul>
+        <a href="#cta" class="btn-primary" style="justify-content:center">Начать</a>
+      </div>
+
+      <div class="pkg-card">
+        <div class="pkg-tier">TIER_03</div>
+        <div class="pkg-name">Премиум</div>
+        <div class="pkg-audience">Средний/крупный · экосистема агентов</div>
+        <div class="pkg-price">$700<span>–1200/мес</span></div>
+        <ul class="pkg-features">
+          <li>5–15 AI-агентов</li>
+          <li>Дашборд аналитики</li>
+          <li>Ежедневные отчёты</li>
+          <li>Безлимитные правки</li>
+          <li>Видео + визуал (Flow/Nano)</li>
+          <li>Выделенный менеджер</li>
+        </ul>
+        <a href="#cta" class="btn-outline" style="justify-content:center">Начать →</a>
+      </div>
+
+      <div class="pkg-card pkg-custom">
+        <div class="pkg-tier">TIER_04</div>
+        <div class="pkg-name" style="color:var(--cyan)">Кастом</div>
+        <div class="pkg-audience">Enterprise · индивидуально</div>
+        <div class="pkg-price" style="font-size:2rem;line-height:1.1">По<br>запросу</div>
+        <ul class="pkg-features">
+          <li>Любой набор услуг</li>
+          <li>SLA и договор</li>
+          <li>Выделенная команда</li>
+          <li>Интеграция с инфраструктурой</li>
+        </ul>
+        <a href="#cta" class="btn-outline" style="justify-content:center;border-color:rgba(0,229,255,.3);color:var(--cyan)">Обсудить →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     08 — FAQ
+════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="tag reveal">08 // FAQ</div>
+    <h2 class="sec-title reveal">ВОПРОСЫ.<br><span class="dim">ОТВЕТЫ.</span></h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Сколько времени займёт запуск первого агента?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Первый результат — за 1–2 недели. Начинаем с аудита (30 мин бесплатно), потом пилот на ваших реальных данных. Видите результат до того, как платите за подписку.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Нужно ли разбираться в технологиях?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Нет. Claude API, Make.com, Apify — инструменты, не ваши проблемы. Видите только результат: «отзывы отвечают сами», «заявки не теряются», «отчёт пришёл в Telegram». Никакого технического жаргона.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Что если агент ответит неправильно?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Каждый агент тестируется на ваших данных до запуска в продакшн. Мониторим качество постоянно и вносим правки в рамках подписки. Для сложных случаев настраиваем эскалацию на менеджера.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Подойдёт ли для моей ниши?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Работаем с WB/Ozon, Avito, Bitrix24/AmoCRM, Bnovo (отели), VK. Если ваша ниша другая — на аудите честно скажем, есть ли смысл. Не берём проекты, где не уверены в результате.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-text">Можно ли отказаться от подписки?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Да, помесячно без штрафов. Но по опыту: клиенты не уходят, потому что агенты работают — экономят время и деньги каждый день. Ретейнер выгоден обеим сторонам.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     09 — CTA + FORM
+════════════════════════ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="reveal">
+        <div class="tag">09 // Получить пилот</div>
+        <div class="cta-title">УЗНАЙТЕ<br>ЗА 30 МИНУТ —<br><span class="cyan">СКОЛЬКО ТЕРЯЕТ<br>ВАШ БИЗНЕС.</span></div>
+        <p class="cta-sub">
+          <strong>Бесплатный аудит:</strong> показываем сколько часов и денег уходит впустую прямо сейчас. Конкретные цифры по вашей нише. Без обязательств.
+        </p>
+        <div class="cta-bullets">
+          <div class="cta-bullet">
+            <div class="bullet-dot"></div>
+            <span>Пилот бесплатно — результат на ваших данных</span>
+          </div>
+          <div class="cta-bullet">
+            <div class="bullet-dot"></div>
+            <span>Первый агент в работе за 1–2 недели</span>
+          </div>
+          <div class="cta-bullet">
+            <div class="bullet-dot"></div>
+            <span>Ответим в Telegram за 2 часа</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <div class="cta-box">
+          <div class="cta-box-label">// ЗАЯВКА НА АУДИТ</div>
+          <form class="cta-form" id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <input type="text" class="form-input" placeholder="Ваше имя" required id="fname">
+              <input type="text" class="form-input" placeholder="Ниша / бизнес" id="fniche">
+            </div>
+            <input type="text" class="form-input" placeholder="Телефон или Telegram (@username)" required id="fcontact">
+            <button type="submit" class="form-submit" id="submitBtn">
+              Получить бесплатный аудит →
+            </button>
+            <div class="form-divider">или</div>
+            <a href="https://t.me/aiway_agency" target="_blank" class="btn-telegram">
+              <svg width="16" height="14" viewBox="0 0 24 20" fill="none" aria-hidden="true">
+                <path d="M22.5 1L1 9.5l6.5 2.5m15-11L16.5 19l-3.5-6m9-12L7.5 12m0 0l2.5 7" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Написать в Telegram
+            </a>
+            <div class="form-note">Ответим за <span>2 часа</span> · Без спама · Без навязчивых звонков</div>
+          </form>
+          <div id="successMsg">
+            <div class="success-big">Заявка принята.</div>
+            <div class="success-sub">Ответим в течение 2 часов</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">AI<span>WAY</span>.AGENCY</div>
+      <div class="footer-links">
+        <a href="#niches">Ниши</a>
+        <a href="#services">Услуги</a>
+        <a href="#how">Процесс</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#packages">Цены</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-meta">
+        AIWAY.AGENCY · AI-агенты для бизнеса СНГ<br>
+        © 2025 · <span style="color:var(--cyan)">24/7</span> · Рынок СНГ
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Scroll reveal ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── Nav active state ── */
+const navSections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  navSections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+  navLinks.forEach(a => {
+    if (a.classList.contains('nav-cta')) return;
+    a.style.color = a.getAttribute('href') === '#' + current ? '#00E5FF' : '';
+  });
+}, { passive: true });
+
+/* ── Services tabs ── */
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.services-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.panel).classList.add('active');
+  });
+});
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* ── Form submit ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }, 900);
+}
+
+/* ── Counter animation ── */
+function runCounters() {
+  document.querySelectorAll('.trust-num').forEach(el => {
+    const raw = el.textContent.replace(/[^0-9]/g, '');
+    const target = parseInt(raw);
+    if (isNaN(target) || target === 0) return;
+    const suffix = el.querySelector('.u') ? el.querySelector('.u').outerHTML : '';
+    const hasSuffix = !!el.querySelector('.u');
+    let val = 0;
+    const step = target / 45;
+    const timer = setInterval(() => {
+      val += step;
+      if (val >= target) { val = target; clearInterval(timer); }
+      el.innerHTML = Math.floor(val) + (hasSuffix ? suffix : '');
+    }, 28);
+  });
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { runCounters(); counterObserver.disconnect(); }
+}, { threshold: 0.4 });
+const trustBar = document.querySelector('.trust-bar');
+if (trustBar) counterObserver.observe(trustBar);
+</script>
+</body>
+</html>
