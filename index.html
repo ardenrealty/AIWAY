@@ -94,7 +94,7 @@ nav {
   color: var(--white); text-transform: uppercase; text-decoration: none;
   display: flex; align-items: center; gap: .3rem; flex-wrap: wrap;
 }
-.nav-logo span { color: var(--cyan); }
+.nav-brand span { color: var(--cyan); }
 .nav-tagline {
   width: 100%;
   font-family: 'Space Mono', monospace; font-size: .6rem;
@@ -212,15 +212,15 @@ nav {
 .hero-headline .accent-dot { color: var(--cyan); }
 
 .hero-bottom {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 3rem; flex-wrap: wrap;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; align-items: start;
 }
 .hero-left { display: flex; flex-direction: column; gap: 1.6rem; max-width: 500px; }
 .hero-desc { font-size: 1.1rem; line-height: 1.72; color: var(--sub); font-weight: 300; }
 .hero-desc strong { color: var(--head); font-weight: 500; }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-.hero-trust { display: flex; flex-direction: column; gap: .6rem; margin-top: 2rem; }
+.hero-trust { display: flex; flex-direction: column; gap: .8rem; justify-self: end; }
 .hero-trust-item { display: flex; align-items: flex-start; gap: .75rem; font-size: .9rem; color: var(--sub); }
 .hero-trust-item strong { color: var(--head); font-weight: 500; }
 .trust-icon { color: var(--cyan); margin-top: 2px; flex-shrink: 0; }
@@ -229,14 +229,17 @@ nav {
    03 — NICHES
 ══════════════════════════════════════ */
 #niches { background: var(--bg); }
+.sec-sub-hero {
+  font-size: 1.25rem; line-height: 1.6; color: var(--white); font-weight: 400; max-width: 700px;
+}
 .niches-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3.5rem;
-  /* 8 niches = 2 rows × 4 */
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 3.5rem;
 }
 .niche-card {
-  padding: 2.2rem 1.8rem; background: var(--bg3);
+  padding: 2.5rem 2.2rem; background: var(--bg3);
   border: 1px solid var(--line); position: relative; overflow: hidden;
   transition: border-color .2s, background .2s;
+  display: flex; flex-direction: column;
 }
 .niche-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -245,15 +248,32 @@ nav {
 }
 .niche-card:hover { background: rgba(0,229,255,.03); border-color: rgba(0,229,255,.18); }
 .niche-card:hover::before { opacity: 1; }
-.niche-icon { margin-bottom: 1.1rem; color: var(--cyan); }
-.niche-icon svg { width: 32px; height: 32px; stroke-width: 1.5; }
-.niche-name {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  font-size: 1.2rem; color: var(--white); text-transform: uppercase;
-  letter-spacing: .04em; margin-bottom: .6rem;
+.niche-title {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 1.6rem; color: var(--white); text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: .5rem;
 }
-.niche-pain { font-size: .83rem; color: var(--sub); line-height: 1.65; margin-bottom: 1.2rem; font-weight: 300; }
-.niche-price { font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--green); letter-spacing: .08em; }
+.niche-desc { font-size: .9rem; color: var(--sub); line-height: 1.65; font-weight: 300; margin-bottom: 1.8rem; }
+.niche-label {
+  font-family: 'Space Mono', monospace; font-size: .62rem;
+  color: var(--cyan); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .8rem;
+}
+.niche-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin-bottom: 2rem; }
+.niche-list li {
+  font-size: .88rem; color: var(--head); display: flex; gap: .65rem; line-height: 1.45; font-weight: 400;
+}
+.niche-list li::before {
+  content: '→'; color: var(--cyan); flex-shrink: 0;
+  font-family: 'Space Mono', monospace; font-size: .68rem; margin-top: .05rem;
+}
+.niche-clients {
+  margin-top: auto;
+}
+.niche-clients-label {
+  font-family: 'Space Mono', monospace; font-size: .58rem;
+  color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.niche-clients-list { font-size: .8rem; color: var(--sub); line-height: 1.65; font-weight: 300; }
 
 /* ══════════════════════════════════════
    04 — SERVICES
@@ -278,25 +298,26 @@ nav {
 .services-panel.active { display: block; }
 
 .srv-header {
-  display: grid; grid-template-columns: 60px 1fr 1.5fr 200px;
+  display: grid; grid-template-columns: 48px 1fr 1fr 140px 170px;
   padding: .75rem 1.5rem; border-bottom: 1px solid var(--line2);
 }
 .srv-col-head {
   font-family: 'Space Mono', monospace; font-size: .6rem;
   color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
 }
+.srv-col-head:nth-child(4), .srv-col-head:nth-child(5) { text-align: left; padding-left: 1.5rem; }
 .srv-row {
-  display: grid; grid-template-columns: 60px 1fr 1.5fr 200px;
+  display: grid; grid-template-columns: 48px 1fr 1fr 140px 170px;
   padding: 1.4rem 1.5rem; border-bottom: 1px solid var(--line);
   transition: background .15s; cursor: default;
 }
+.srv-row .srv-price { padding-left: 1.5rem; }
 .srv-row:hover { background: var(--bg3); }
-.srv-row:hover .srv-name { color: var(--cyan); }
 .srv-num { font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--muted); padding-top: .15rem; }
-.srv-name { font-weight: 600; color: var(--head); font-size: .92rem; margin-bottom: .28rem; transition: color .15s; }
+.srv-name { font-weight: 600; color: var(--white); font-size: .92rem; margin-bottom: .28rem; }
 .srv-desc-small { font-size: .78rem; color: var(--muted); font-weight: 300; }
 .srv-desc { font-size: .82rem; color: var(--sub); line-height: 1.55; font-weight: 300; }
-.srv-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--green); text-align: right; letter-spacing: .02em; white-space: nowrap; align-self: center; }
+.srv-price { font-family: 'Space Mono', monospace; font-size: .72rem; color: var(--green); text-align: left; letter-spacing: .04em; white-space: nowrap; align-self: center; }
 .srv-row.srv-featured { background: var(--cyan-dim); border-left: 2px solid var(--cyan); }
 
 /* ══════════════════════════════════════
@@ -304,7 +325,7 @@ nav {
 ══════════════════════════════════════ */
 #how { background: var(--bg); }
 .steps {
-  display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 3.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 2rem; align-items: stretch;
 }
 .step {
   padding: 2.8rem 2.2rem; border: 1px solid var(--line);
@@ -327,12 +348,12 @@ nav {
   font-size: 1.4rem; color: var(--white); text-transform: uppercase;
   letter-spacing: .02em; margin-bottom: .8rem; line-height: 1.1;
 }
-.step-desc { font-size: .85rem; color: var(--sub); line-height: 1.68; font-weight: 300; margin-bottom: 1.4rem; }
+.step-desc { font-size: .85rem; color: var(--sub); line-height: 1.68; font-weight: 300; }
 .step-time {
   margin-top: auto;
   font-family: 'Space Mono', monospace; font-size: .62rem;
-  color: var(--green); letter-spacing: .1em; margin-top: 1.4rem;
-  text-transform: uppercase;
+  color: var(--green); letter-spacing: .1em;
+  text-transform: uppercase; padding-top: 1.4rem;
 }
 
 /* ══════════════════════════════════════
@@ -381,68 +402,13 @@ nav {
 }
 
 /* ══════════════════════════════════════
-   07 — PACKAGES
-══════════════════════════════════════ */
-#packages { background: var(--bg); }
-.pkg-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3.5rem;
-}
-.pkg-card {
-  padding: 2.5rem 2rem; background: var(--bg3);
-  border: 1px solid var(--line); position: relative;
-  display: flex; flex-direction: column;
-}
-.pkg-card.featured {
-  background: var(--bg2); border-color: rgba(0,229,255,.3);
-}
-.pkg-card.featured::before {
-  content: 'ПОПУЛЯРНЫЙ';
-  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-  background: var(--cyan); color: #080810;
-  font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: .1em;
-  padding: .28rem .9rem; white-space: nowrap; font-weight: 700;
-}
-.pkg-custom {
-  background: var(--cyan-dim) !important; border-color: rgba(0,229,255,.15) !important;
-}
-.pkg-tier {
-  font-family: 'Space Mono', monospace; font-size: .62rem;
-  color: var(--muted); letter-spacing: .12em; margin-bottom: 1rem;
-}
-.pkg-name {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-  font-size: 1.8rem; color: var(--white); text-transform: uppercase;
-  letter-spacing: .04em; margin-bottom: .3rem;
-}
-.pkg-audience { font-size: .78rem; color: var(--sub); margin-bottom: 1.8rem; font-weight: 300; }
-.pkg-price {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-  font-size: 2.9rem; color: var(--white); line-height: 1;
-  letter-spacing: -.025em; margin-bottom: 1.6rem;
-}
-.pkg-price span { font-size: .88rem; color: var(--muted); font-weight: 400; }
-.pkg-features {
-  list-style: none; display: flex; flex-direction: column;
-  gap: .68rem; margin-bottom: 2rem; flex: 1;
-}
-.pkg-features li {
-  font-size: .82rem; color: var(--sub); display: flex;
-  gap: .65rem; line-height: 1.45; font-weight: 300;
-}
-.pkg-features li::before {
-  content: '→'; color: var(--cyan); flex-shrink: 0;
-  font-family: 'Space Mono', monospace; font-size: .68rem; margin-top: .05rem;
-}
-.pkg-card.featured .pkg-features li { color: var(--body-c); }
-
-/* ══════════════════════════════════════
    08 — FAQ
 ══════════════════════════════════════ */
 #faq { background: var(--bg2); }
-.faq-list { margin-top: 3.5rem; }
+.faq-list { margin-top: 1.75rem; }
 .faq-item { border: 1px solid var(--line); border-bottom: none; overflow: hidden; border-left: 2px solid transparent; transition: border-left .2s; }
 .faq-item.open { border-left: 2px solid var(--cyan); }
-.faq-item.open .faq-q-text { color: var(--white); transition: color .2s; }
+.faq-item.open .faq-q-text { color: #FFFFFF; transition: color .2s; }
 .faq-item:last-child { border-bottom: 1px solid var(--line); }
 .faq-q {
   display: flex; justify-content: space-between; align-items: center;
@@ -452,7 +418,7 @@ nav {
 .faq-q:hover { background: rgba(255,255,255,.02); }
 .faq-q-text { font-weight: 600; color: var(--head); font-size: .94rem; }
 .faq-icon {
-  font-family: 'Space Mono', monospace; font-size: 1rem;
+  font-family: 'Space Mono', monospace; font-size: 18px;
   color: var(--cyan); transition: transform .3s; flex-shrink: 0; margin-left: 1rem;
 }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
@@ -561,6 +527,26 @@ footer {
   text-transform: uppercase; transition: color .15s;
 }
 .footer-links a:hover { color: var(--sub); }
+/* CONSENT */
+.consent-block { margin-top: 1rem; }
+.consent-label { display: flex; align-items: flex-start; gap: .75rem; cursor: pointer; }
+.consent-label input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--cyan); width: 16px; height: 16px; }
+.consent-text { font-family: 'Space Mono', monospace; font-size: .65rem; color: var(--sub); line-height: 1.6; letter-spacing: .04em; }
+.consent-text a { color: var(--cyan); text-decoration: underline; }
+
+.footer-right { text-align: right; }
+.footer-requisites {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  color: var(--muted); letter-spacing: .08em; line-height: 1.72; margin-bottom: .6rem;
+}
+.footer-legal {
+  font-family: 'Space Mono', monospace; font-size: .6rem;
+  letter-spacing: .06em; margin-bottom: .6rem;
+}
+.footer-legal a {
+  color: var(--sub); text-decoration: underline; transition: color .15s;
+}
+.footer-legal a:hover { color: var(--cyan); }
 .footer-meta {
   font-family: 'Space Mono', monospace; font-size: .6rem;
   color: var(--muted); letter-spacing: .06em; text-align: right; line-height: 1.72;
@@ -570,20 +556,20 @@ footer {
    RESPONSIVE
 ══════════════════════════════════════ */
 @media(max-width: 1100px) {
-  .pkg-grid { grid-template-columns: repeat(3, 1fr); }
-  .niches-grid { grid-template-columns: repeat(4, 1fr); }
-  .srv-header, .srv-row { grid-template-columns: 52px 1fr 1.5fr; }
-  .srv-col-head:last-child, .srv-price { display: none; }
+  .niches-grid { grid-template-columns: repeat(2, 1fr); }
+  .srv-header, .srv-row { grid-template-columns: 48px 1fr 1fr; }
+  .srv-col-head:nth-child(4), .srv-col-head:nth-child(5), .srv-price { display: none; }
 }
 @media(max-width: 900px) {
   .container, nav, #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
-  .niches-grid { grid-template-columns: repeat(2, 1fr); }
-  .pkg-grid { grid-template-columns: 1fr; }
+  .niches-grid { grid-template-columns: 1fr; }
   .cases-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .step:nth-child(2) { border-right: 1px solid var(--line); }
   .step:nth-child(3) { border-top: none; }
   .step:nth-child(4) { border-right: 1px solid var(--line); border-top: none; }
+  .hero-bottom { grid-template-columns: 1fr; }
+  .hero-trust { justify-self: start; }
   .cta-inner { grid-template-columns: 1fr; gap: 3rem; }
 }
 @media(max-width: 640px) {
@@ -592,7 +578,6 @@ footer {
   .hero-headline { font-size: clamp(3.5rem, 16vw, 6rem); }
   .niches-grid { grid-template-columns: 1fr; }
   .cases-grid { grid-template-columns: 1fr; }
-  .pkg-grid { grid-template-columns: 1fr; }
   .services-tabs { flex-wrap: wrap; }
   .steps { grid-template-columns: 1fr; }
   .step { border-right: 1px solid var(--line) !important; }
@@ -601,10 +586,12 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-links { justify-content: center; }
+  .footer-right { text-align: center; }
   .footer-meta { text-align: center; }
   .srv-header, .srv-row { grid-template-columns: 44px 1fr; }
   .srv-col-head:nth-child(3),
   .srv-col-head:nth-child(4),
+  .srv-col-head:nth-child(5),
   .srv-desc, .srv-price { display: none; }
 }
 </style>
@@ -623,8 +610,7 @@ footer {
       <path d="M8 112 L58 8 L72 8 L122 112" stroke="#F0F0F8" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
       <path d="M27 72 L103 72" stroke="rgba(240,240,248,.2)" stroke-width="3.5" stroke-linecap="square"/>
       <rect x="52" y="58" width="26" height="26" fill="#00E5FF"/>
-    </svg>
-    AI<span>WAY</span>
+    </svg><span class="nav-brand">AI<span>WAY</span></span>
     <span class="nav-tagline">ИИ-агентство автоматизаций</span>
   </a>
   <ul class="nav-links">
@@ -632,7 +618,7 @@ footer {
     <li><a href="#services">Услуги</a></li>
     <li><a href="#how">Процесс</a></li>
     <li><a href="#cases">Кейсы</a></li>
-    <li><a href="#packages">Цены</a></li>
+
     <li><a href="#faq">Вопросы</a></li>
     <li><a href="#cta" class="nav-cta">Получить пилот</a></li>
   </ul>
@@ -658,19 +644,19 @@ footer {
           <a href="#cta" class="btn-primary">Получить пилот бесплатно</a>
           <a href="#cases" class="btn-outline">Смотреть кейсы</a>
         </div>
-        <div class="hero-trust">
-          <div class="hero-trust-item">
-            <span class="trust-icon">✦</span>
-            <span class="trust-text"><strong>Пилот бесплатно</strong> — сначала результат, потом оплата</span>
-          </div>
-          <div class="hero-trust-item">
-            <span class="trust-icon">✦</span>
-            <span class="trust-text"><strong>Работаем 24/7</strong> — ИИ не уходит в отпуск и не болеет</span>
-          </div>
-          <div class="hero-trust-item">
-            <span class="trust-icon">✦</span>
-            <span class="trust-text"><strong>Первый результат</strong> — от 3 дней после запуска</span>
-          </div>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <span class="trust-icon">✦</span>
+          <span class="trust-text"><strong>Пилот бесплатно</strong> — сначала результат, потом оплата</span>
+        </div>
+        <div class="hero-trust-item">
+          <span class="trust-icon">✦</span>
+          <span class="trust-text"><strong>Работаем 24/7</strong> — ИИ не уходит в отпуск и не болеет</span>
+        </div>
+        <div class="hero-trust-item">
+          <span class="trust-icon">✦</span>
+          <span class="trust-text"><strong>Первый результат</strong> — от 3 дней после запуска</span>
         </div>
       </div>
     </div>
@@ -685,56 +671,38 @@ footer {
   <div class="container">
     <div class="tag reveal">03 // Для кого</div>
     <h2 class="sec-title reveal">ДЛЯ КОГО<br><span class="dim">МЫ РАБОТАЕМ.</span></h2>
-    <p class="sec-sub reveal">Выберите свою нишу — покажем что именно автоматизируем.</p>
+    <p class="sec-sub-hero reveal">Работаем с любым бизнесом — автоматизируем любой ваш процесс</p>
 
     <div class="niches-grid reveal">
       <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="shopping-cart"></i></div>
-        <div class="niche-name">WB / Ozon / Avito</div>
-        <div class="niche-pain">Карточки не работают. Сотни отзывов висят без ответа. Конкуренты обходят в поиске каждую неделю.</div>
-        <div class="niche-price">8 000–18 000 ₽/мес</div>
+        <div class="niche-title">Клиентский сервис</div>
+        <div class="niche-desc">Автоматизируем всё что касается ваших клиентов</div>
+        <div class="niche-label">// Популярные направления</div>
+        <ul class="niche-list">
+          <li>Автоответы на отзывы (WB, Ozon, Avito)</li>
+          <li>Запись и напоминания клиентам</li>
+          <li>Автоматическое составление КП</li>
+          <li>Оплата и инструкции через бот</li>
+        </ul>
+        <div class="niche-clients">
+          <div class="niche-clients-label">// Основные клиенты</div>
+          <div class="niche-clients-list">Отели, рестораны, фитнес, клиники, салоны, маркетплейсы, отдел продаж</div>
+        </div>
       </div>
       <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="building-2"></i></div>
-        <div class="niche-name">B2B / CRM</div>
-        <div class="niche-pain">Лиды теряются в CRM. КП пишется вручную часами. Менеджеры не успевают. Нет аналитики по воронке.</div>
-        <div class="niche-price">15 000–30 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="key-round"></i></div>
-        <div class="niche-name">Отели / Bnovo</div>
-        <div class="niche-pain">Репутация не управляется. Гости уходят без приветственных сообщений. Негативные отзывы без ответа неделями.</div>
-        <div class="niche-price">15 000–25 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="home"></i></div>
-        <div class="niche-name">Недвижимость</div>
-        <div class="niche-pain">Сотни объявлений на Avito. Лиды теряются — не успеваете отвечать. Ручная работа съедает 3–4 часа ежедневно.</div>
-        <div class="niche-price">15 000–25 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="users"></i></div>
-        <div class="niche-name">HR / Рекрутинг</div>
-        <div class="niche-pain">Скрининг резюме вручную. Онбординг не автоматизирован. HR тратит недели там, где нужны часы.</div>
-        <div class="niche-price">20 000–40 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="file-text"></i></div>
-        <div class="niche-name">Юристы</div>
-        <div class="niche-pain">Анализ договоров вручную. Типовые документы занимают часы. Клиенты ждут ответа по 2 дня.</div>
-        <div class="niche-price">20 000–35 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="book-open"></i></div>
-        <div class="niche-name">Онлайн-школы</div>
-        <div class="niche-pain">Куратор не успевает. Студенты без обратной связи уходят. TMA-платформа стоит дорого.</div>
-        <div class="niche-price">20 000–40 000 ₽/мес</div>
-      </div>
-      <div class="niche-card">
-        <div class="niche-icon"><i data-lucide="coffee"></i></div>
-        <div class="niche-name">Рестораны / Фитнес</div>
-        <div class="niche-pain">Запись вручную. Отзывы без ответа. TMA для лояльности кажется дорогим и сложным.</div>
-        <div class="niche-price">15 000–25 000 ₽/мес</div>
+        <div class="niche-title">Внутренние процессы</div>
+        <div class="niche-desc">Автоматизируем всё что происходит внутри бизнеса</div>
+        <div class="niche-label">// Популярные направления</div>
+        <ul class="niche-list">
+          <li>ИИ-юрист — анализ договоров, типовые документы</li>
+          <li>ИИ-HR — скрининг резюме, онбординг</li>
+          <li>ИИ-консультант — внутренняя база знаний</li>
+          <li>Документооборот и отчётность</li>
+        </ul>
+        <div class="niche-clients">
+          <div class="niche-clients-label">// Основные клиенты</div>
+          <div class="niche-clients-list">Юридические фирмы, HR-отделы, B2B-компании, управленцы</div>
+        </div>
       </div>
     </div>
   </div>
@@ -746,7 +714,7 @@ footer {
 <section id="services">
   <div class="container">
     <div class="tag reveal">04 // Услуги</div>
-    <h2 class="sec-title reveal">19 УСЛУГ.<br><span class="dim">6 КАТЕГОРИЙ.</span></h2>
+    <h2 class="sec-title reveal">18 УСЛУГ.<br><span class="dim">6 КАТЕГОРИЙ.</span></h2>
     <p class="sec-sub reveal">Каждая услуга — это результат, который вы видите. Не техническое описание, а конкретное действие: «отзывы закрываются сами», «заявки не теряются».</p>
 
     <div class="reveal">
@@ -765,37 +733,43 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
         </div>
         <div class="srv-row srv-featured">
           <div class="srv-num">01</div>
-          <div><div class="srv-name">Комплексная ИИ-автоматизация под ключ</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
+          <div><div class="srv-name">Комплексная ИИ-автоматизация</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
           <div class="srv-desc">Аудит → карта процессов → внедрение пакета ИИ-агентов под специфику бизнеса</div>
-          <div class="srv-price">от 50 000 ₽ + 40 000–90 000 ₽/мес</div>
+          <div class="srv-price">от 50 000 ₽</div>
+          <div class="srv-price">40 000–90 000 ₽</div>
         </div>
         <div class="srv-row srv-featured">
           <div class="srv-num">02</div>
-          <div><div class="srv-name">ИИ-бот Telegram / WhatsApp</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
+          <div><div class="srv-name">ИИ-бот Telegram</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
           <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
-          <div class="srv-price">от 25 000 ₽ + 12 000–20 000 ₽/мес</div>
+          <div class="srv-price">от 25 000 ₽</div>
+          <div class="srv-price">12 000–20 000 ₽</div>
         </div>
         <div class="srv-row srv-featured">
           <div class="srv-num">03</div>
           <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
-          <div class="srv-desc">Заявка → ИИ квалифицирует → сделка в CRM → уведомление. 24/7</div>
-          <div class="srv-price">от 20 000 ₽ + 15 000–30 000 ₽/мес</div>
+          <div class="srv-desc">Заявка → ИИ-квалификация → сделка в CRM → уведомление. 24/7</div>
+          <div class="srv-price">от 20 000 ₽</div>
+          <div class="srv-price">15 000–30 000 ₽</div>
         </div>
         <div class="srv-row srv-featured">
           <div class="srv-num">04</div>
           <div><div class="srv-name">Автоответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
           <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
-          <div class="srv-price">от 10 000 ₽ + 8 000–18 000 ₽/мес</div>
+          <div class="srv-price">бесплатно</div>
+          <div class="srv-price">8 000–18 000 ₽</div>
         </div>
         <div class="srv-row srv-featured">
           <div class="srv-num">05</div>
           <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Ежедневный отчёт в Telegram</div></div>
-          <div class="srv-desc">Парсит цены и позиции конкурентов. Анализирует тренды. Отчёт каждое утро в Telegram</div>
-          <div class="srv-price">от 10 000 ₽ + 10 000–18 000 ₽/мес</div>
+          <div class="srv-desc">Парсинг цен и позиций конкурентов. Анализ трендов. Отчёт каждое утро в Telegram</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">10 000–18 000 ₽</div>
         </div>
       </div>
 
@@ -805,31 +779,36 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">01</div>
-          <div><div class="srv-name">ИИ-ответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
+          <div><div class="srv-name">Автоответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
           <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
-          <div class="srv-price">8 000–18 000 ₽/мес</div>
+          <div class="srv-price">бесплатно</div>
+          <div class="srv-price">8 000–18 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">02</div>
           <div><div class="srv-name">Оптимизация карточек товаров</div><div class="srv-desc-small">SEO · описания · инфографика</div></div>
           <div class="srv-desc">Переписывает SEO-тексты под алгоритмы маркетплейсов. Создаёт инфографику автоматически</div>
-          <div class="srv-price">от 10 000 ₽ + 12 000–20 000 ₽/мес</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">12 000–20 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">03</div>
           <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Ежедневный отчёт в Telegram</div></div>
-          <div class="srv-desc">Парсит цены и позиции конкурентов. Анализирует тренды. Отчёт каждое утро в Telegram</div>
-          <div class="srv-price">от 10 000 ₽ + 10 000–18 000 ₽/мес</div>
+          <div class="srv-desc">Парсинг цен и позиций конкурентов. Анализ трендов. Отчёт каждое утро в Telegram</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">10 000–18 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">04</div>
           <div><div class="srv-name">Видеокарточки WB/Ozon</div><div class="srv-desc-small">5–8 сек ролик из фото товара</div></div>
           <div class="srv-desc">Создаёт видео из фото товара. Формат для WB/Ozon Video. Без съёмки и дизайнера</div>
-          <div class="srv-price">от 15 000 ₽ + 12 000–20 000 ₽/мес</div>
+          <div class="srv-price">от 15 000 ₽</div>
+          <div class="srv-price">12 000–20 000 ₽</div>
         </div>
       </div>
 
@@ -839,31 +818,36 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">05</div>
           <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
-          <div class="srv-desc">Заявка → ИИ квалифицирует → сделка в CRM → уведомление менеджеру. 24/7</div>
-          <div class="srv-price">от 20 000 ₽ + 15 000–30 000 ₽/мес</div>
+          <div class="srv-desc">Заявка → ИИ-квалификация → сделка в CRM → уведомление менеджеру. 24/7</div>
+          <div class="srv-price">от 20 000 ₽</div>
+          <div class="srv-price">15 000–30 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">06</div>
           <div><div class="srv-name">Автоматические КП</div><div class="srv-desc-small">Персональное КП за 30 секунд</div></div>
-          <div class="srv-desc">1 кнопка → ИИ читает сделку → персональное КП за 30 секунд</div>
-          <div class="srv-price">от 20 000 ₽ + 15 000–25 000 ₽/мес</div>
+          <div class="srv-desc">1 кнопка → ИИ-анализ сделки → персональное КП за 30 секунд</div>
+          <div class="srv-price">от 20 000 ₽</div>
+          <div class="srv-price">15 000–25 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">07</div>
           <div><div class="srv-name">Аналитика воронки продаж</div><div class="srv-desc-small">Еженедельный отчёт директору</div></div>
           <div class="srv-desc">Еженедельный отчёт: конверсии, узкие места, рекомендации директору</div>
-          <div class="srv-price">от 10 000 ₽ + 10 000–18 000 ₽/мес</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">10 000–18 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">08</div>
           <div><div class="srv-name">ИИ-ответы в Avito / Telegram</div><div class="srv-desc-small">Сообщение → квалификация → ответ</div></div>
           <div class="srv-desc">Сообщение → квалификация → ответ → уведомление менеджеру</div>
-          <div class="srv-price">от 10 000 ₽ + 8 000–15 000 ₽/мес</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">8 000–15 000 ₽</div>
         </div>
       </div>
 
@@ -873,25 +857,22 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">09</div>
           <div><div class="srv-name">ИИ-контент для ВКонтакте/Telegram</div><div class="srv-desc-small">Автопостинг · по расписанию</div></div>
           <div class="srv-desc">ИИ пишет текст → генерирует визуал → публикует по расписанию</div>
-          <div class="srv-price">от 10 000 ₽ + 10 000–18 000 ₽/мес</div>
+          <div class="srv-price">от 10 000 ₽</div>
+          <div class="srv-price">10 000–18 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">10</div>
           <div><div class="srv-name">Рекламные баннеры + видео</div><div class="srv-desc-small">4K баннеры · видеоролики</div></div>
           <div class="srv-desc">Генерирует 4K баннеры и видеоролики. Без дизайнера</div>
-          <div class="srv-price">от 15 000 ₽ + 12 000–20 000 ₽/мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">11</div>
-          <div><div class="srv-name">ИИ-автоматизация для отелей</div><div class="srv-desc-small">Bnovo · репутация · лояльность</div></div>
-          <div class="srv-desc">Приветственные сообщения при заезде, ответы на отзывы, программа лояльности</div>
-          <div class="srv-price">от 15 000 ₽ + 12 000–20 000 ₽/мес</div>
+          <div class="srv-price">от 15 000 ₽</div>
+          <div class="srv-price">12 000–20 000 ₽</div>
         </div>
       </div>
 
@@ -901,43 +882,50 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">11</div>
+          <div><div class="srv-name">Telegram Mini App под бизнес</div><div class="srv-desc-small">Магазин · запись · каталог · лояльность</div></div>
+          <div class="srv-desc">Заменяет мобильное приложение. Магазин, запись, каталог, программа лояльности в Telegram</div>
+          <div class="srv-price">от 45 000 ₽</div>
+          <div class="srv-price">от 8 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">12</div>
-          <div><div class="srv-name">Telegram Mini App под бизнес</div><div class="srv-desc-small">Магазин · запись · каталог · лояльность</div></div>
-          <div class="srv-desc">Заменяет мобильное приложение. Магазин, запись, каталог, программа лояльности в Telegram</div>
-          <div class="srv-price">от 45 000 ₽ + от 8 000 ₽/мес</div>
+          <div><div class="srv-name">ИИ-бот Telegram</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
+          <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
+          <div class="srv-price">от 25 000 ₽</div>
+          <div class="srv-price">12 000–20 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">13</div>
-          <div><div class="srv-name">ИИ-бот Telegram / WhatsApp</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
-          <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
-          <div class="srv-price">от 25 000 ₽ + 12 000–20 000 ₽/мес</div>
+          <div><div class="srv-name">Сайт / лендинг с ИИ-воронкой</div><div class="srv-desc-small">ИИ-чат · квалификация лида · CRM</div></div>
+          <div class="srv-desc">Сайт с ИИ, квалификацией лида и передачей в CRM</div>
+          <div class="srv-price">от 30 000 ₽</div>
+          <div class="srv-price">от 5 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">14</div>
-          <div><div class="srv-name">Сайт / лендинг с ИИ-воронкой</div><div class="srv-desc-small">ИИ-чат · квалификация лида · CRM</div></div>
-          <div class="srv-desc">Сайт с ИИ-чатом, квалификацией лида и передачей в CRM. Воронка под ключ</div>
-          <div class="srv-price">от 30 000 ₽ + от 5 000 ₽/мес</div>
+          <div><div class="srv-name">Сайт / лендинг под ключ</div><div class="srv-desc-small">HTML · Tilda</div></div>
+          <div class="srv-desc">Сайты и лендинги любой сложности</div>
+          <div class="srv-price">от 30 000 ₽</div>
+          <div class="srv-price">—</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">15</div>
-          <div><div class="srv-name">Сайт / лендинг под ключ</div><div class="srv-desc-small">Квиз · розыгрыш · акция</div></div>
-          <div class="srv-desc">Квиз, розыгрыш, анкета с оплатой. Под сезонные акции</div>
-          <div class="srv-price">от 30 000 ₽</div>
+          <div><div class="srv-name">ИИ-виджет для сайта</div><div class="srv-desc-small">Встраиваемый чат · квалификация</div></div>
+          <div class="srv-desc">Встраиваемый чат. Знает продукт и прайс. Квалифицирует лид и передаёт в CRM</div>
+          <div class="srv-price">от 15 000 ₽</div>
+          <div class="srv-price">от 5 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">16</div>
-          <div><div class="srv-name">ИИ-виджет для сайта</div><div class="srv-desc-small">Встраиваемый чат · квалификация</div></div>
-          <div class="srv-desc">Встраиваемый чат. Знает продукт и прайс. Квалифицирует лид и передаёт в CRM</div>
-          <div class="srv-price">от 15 000 ₽ + от 5 000 ₽/мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">17</div>
           <div><div class="srv-name">Создание приложений</div><div class="srv-desc-small">Веб-приложения · инструменты · автоматизация</div></div>
           <div class="srv-desc">Разрабатываем веб-приложения и цифровые инструменты под задачи вашего бизнеса</div>
-          <div class="srv-price">от 35 000 ₽ + от 8 000 ₽/мес</div>
+          <div class="srv-price">от 35 000 ₽</div>
+          <div class="srv-price">от 8 000 ₽</div>
         </div>
       </div>
 
@@ -947,19 +935,22 @@ footer {
           <div class="srv-col-head">#</div>
           <div class="srv-col-head">Услуга</div>
           <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head" style="text-align:right">Цена</div>
+          <div class="srv-col-head">Установка</div>
+          <div class="srv-col-head">Подписка / мес</div>
+        </div>
+        <div class="srv-row">
+          <div class="srv-num">17</div>
+          <div><div class="srv-name">ИИ-интеграция под ключ</div><div class="srv-desc-small">в любую сферу бизнеса</div></div>
+          <div class="srv-desc">Аудит → карта автоматизаций → внедрение пакета ИИ-агентов под специфику бизнеса</div>
+          <div class="srv-price">от 50 000 ₽</div>
+          <div class="srv-price">40 000–90 000 ₽</div>
         </div>
         <div class="srv-row">
           <div class="srv-num">18</div>
-          <div><div class="srv-name">ИИ-интеграция под ключ</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
-          <div class="srv-desc">Аудит → карта автоматизаций → внедрение пакета ИИ-агентов под специфику бизнеса</div>
-          <div class="srv-price">от 50 000 ₽ + 40 000–90 000 ₽/мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">19</div>
           <div><div class="srv-name">Автоматизация бизнес-процессов</div><div class="srv-desc-small">Любые процессы · документооборот · отчёты</div></div>
           <div class="srv-desc">Автоматизируем любые повторяющиеся процессы: документооборот, уведомления, отчёты, согласования</div>
-          <div class="srv-price">от 20 000 ₽ + от 5 000 ₽/мес</div>
+          <div class="srv-price">от 20 000 ₽</div>
+          <div class="srv-price">от 5 000 ₽</div>
         </div>
       </div>
     </div>
@@ -980,28 +971,28 @@ footer {
         <div class="step-bg-num">01</div>
         <div class="step-tag">// АУДИТ</div>
         <div class="step-title">Разбор<br>за 30 минут</div>
-        <div class="step-desc">Показываем сколько часов и денег теряет ваш бизнес прямо сейчас. Конкретные цифры по вашей нише. Без обязательств.</div>
+        <div class="step-desc">Показываем сколько часов и денег теряет ваш бизнес прямо сейчас. Конкретные цифры по вашей нише.</div>
         <div class="step-time">БЕСПЛАТНО · 30 МИН</div>
       </div>
       <div class="step">
         <div class="step-bg-num">02</div>
         <div class="step-tag">// ПИЛОТ</div>
         <div class="step-title">Первый агент<br>в деле</div>
-        <div class="step-desc">Запускаем одного агента на ваших реальных данных. Видите результат до оплаты подписки. Никакого «кота в мешке».</div>
+        <div class="step-desc">Запускаем одного агента на ваших реальных данных. Видите результат до оплаты подписки.</div>
         <div class="step-time">ПЕРВЫЙ РЕЗУЛЬТАТ ОТ 3 ДНЕЙ</div>
       </div>
       <div class="step">
         <div class="step-bg-num">03</div>
         <div class="step-tag">// ПОДПИСКА</div>
         <div class="step-title">Система<br>работает</div>
-        <div class="step-desc">Масштабируем до нужного числа агентов. Мониторинг 24/7 с нашей стороны. Еженедельные отчёты по метрикам.</div>
+        <div class="step-desc">Масштабируем до нужного числа агентов. Мониторинг 24/7 с нашей стороны. Еженедельные отчёты.</div>
         <div class="step-time">ОТ 8 000 ₽/МЕС</div>
       </div>
       <div class="step">
         <div class="step-bg-num">04</div>
         <div class="step-tag">// РОСТ</div>
         <div class="step-title">Новые<br>направления</div>
-        <div class="step-desc">Каждый месяц добавляем новые автоматизации. Ваш рост — наш рост. Ретейнер-модель: уходить невыгодно обоим.</div>
+        <div class="step-desc">Постоянно добавляем, обновляем и улучшаем автоматизации. Ваш рост — наш рост.</div>
         <div class="step-time">ВАШИ АГЕНТЫ РАСТУТ</div>
       </div>
     </div>
@@ -1015,91 +1006,30 @@ footer {
   <div class="container">
     <div class="tag reveal">06 // Кейсы</div>
     <h2 class="sec-title reveal">РЕЗУЛЬТАТЫ<br><span class="dim">В ЦИФРАХ.</span></h2>
-    <p class="sec-sub reveal">Показываем как это работает — конкретные задачи и решения.</p>
+    <p class="sec-sub reveal">Показываем как это работает — конкретные проблемы и их решение.</p>
 
     <div class="cases-grid">
       <div class="case-card reveal">
         <div class="case-niche">// МАРКЕТПЛЕЙС · WB · ОДЕЖДА</div>
         <div class="case-pain">
-          <strong>Задача:</strong> 340 отзывов в месяц — отвечали вручную 2–3 дня. Рейтинг падал, карточки опускались в поиске.
+          <strong>Проблема:</strong> 340 отзывов в месяц — отвечали вручную 2–3 дня. Рейтинг падал, карточки опускались в поиске.
         </div>
         <div class="case-label"><strong>Решение:</strong> Настроили ИИ-агента, который отвечает на каждый отзыв персонально за 2–3 минуты. Работает 24/7 без участия менеджера.</div>
       </div>
       <div class="case-card reveal reveal-d1">
         <div class="case-niche">// НЕДВИЖИМОСТЬ · AVITO · МОСКВА</div>
         <div class="case-pain">
-          <strong>Задача:</strong> 3 менеджера не успевали отвечать на Avito. Горячие лиды остывали без ответа за 30–40 минут.
+          <strong>Проблема:</strong> 3 менеджера не успевали отвечать на Avito. Горячие лиды остывали без ответа за 30–40 минут.
         </div>
         <div class="case-label"><strong>Решение:</strong> ИИ квалифицирует и отвечает мгновенно. Менеджер получает готовый контекст с квалификацией лида.</div>
       </div>
       <div class="case-card reveal reveal-d2">
-        <div class="case-niche">// ОТЕЛЬ · BNOVO · 45 НОМЕРОВ</div>
+        <div class="case-niche">// ПРАВО · АДВОКАТСКОЕ БЮРО</div>
         <div class="case-pain">
-          <strong>Задача:</strong> Гости не получали приветственное сообщение. Негативные отзывы на Booking не закрывались неделями.
+          <strong>Проблема:</strong> Анализ договоров занимал 2–3 часа. Типовые документы составлялись вручную. Клиенты ждали ответа по 2 дня.
         </div>
-        <div class="case-label"><strong>Решение:</strong> Автоответы на все отзывы. Приветственная цепочка при заезде. Программа лояльности для возвратных гостей.</div>
+        <div class="case-label"><strong>Решение:</strong> Настроили ИИ-помощника который анализирует договор за 10 минут. Типовые документы готовы мгновенно. Юрист занимается стратегией, не рутиной.</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════
-     07 — PACKAGES
-════════════════════════ -->
-<section id="packages">
-  <div class="container">
-    <div class="tag reveal">07 // Пакеты</div>
-    <h2 class="sec-title reveal">ПОДПИСКА.<br><span class="dim">НЕ ПРОЕКТ.</span></h2>
-    <p class="sec-sub reveal">Ретейнер-модель — не уходим после запуска. Агенты работают, мы следим, вы растёте.</p>
-
-    <div class="pkg-grid reveal">
-      <div class="pkg-card">
-        <div class="pkg-tier">TIER_01</div>
-        <div class="pkg-name">Старт</div>
-        <div class="pkg-audience">Малый бизнес · первый ИИ-агент</div>
-        <div class="pkg-price">8 000<span>–18 000 ₽/мес</span></div>
-        <ul class="pkg-features">
-          <li>1–2 автоматизации под ключ</li>
-          <li>Мониторинг и поддержка</li>
-          <li>Отчёт раз в месяц</li>
-          <li>До 3 правок в месяц</li>
-          <li>Telegram-поддержка</li>
-        </ul>
-        <a href="#cta" class="btn-outline" style="justify-content:center">Начать →</a>
-      </div>
-
-      <div class="pkg-card featured">
-        <div class="pkg-tier">TIER_02</div>
-        <div class="pkg-name">Стандарт</div>
-        <div class="pkg-audience">Средний бизнес · полная автоматизация</div>
-        <div class="pkg-price">20 000<span>–40 000 ₽/мес</span></div>
-        <ul class="pkg-features">
-          <li>3–5 ИИ-агентов в работе</li>
-          <li>Мониторинг 24/7</li>
-          <li>Еженедельный отчёт</li>
-          <li>До 8 правок в месяц</li>
-          <li>1 новая автоматизация/мес</li>
-          <li>Приоритетная поддержка</li>
-        </ul>
-        <a href="#cta" class="btn-primary" style="justify-content:center">Начать</a>
-      </div>
-
-      <div class="pkg-card">
-        <div class="pkg-tier">TIER_03</div>
-        <div class="pkg-name">Премиум</div>
-        <div class="pkg-audience">Средний/крупный · экосистема агентов</div>
-        <div class="pkg-price">50 000<span>–90 000 ₽/мес</span></div>
-        <ul class="pkg-features">
-          <li>5–15 ИИ-агентов</li>
-          <li>Дашборд аналитики</li>
-          <li>Ежедневные отчёты</li>
-          <li>Безлимитные правки</li>
-          <li>Видео + визуальный контент</li>
-          <li>Выделенный менеджер</li>
-        </ul>
-        <a href="#cta" class="btn-outline" style="justify-content:center">Начать →</a>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1109,7 +1039,7 @@ footer {
 ════════════════════════ -->
 <section id="faq">
   <div class="container">
-    <div class="tag reveal">08 // Вопросы</div>
+    <div class="tag reveal">07 // Вопросы</div>
     <h2 class="sec-title reveal">ВОПРОСЫ.<br><span class="dim">ОТВЕТЫ.</span></h2>
 
     <div class="faq-list reveal">
@@ -1139,14 +1069,14 @@ footer {
           <span class="faq-q-text">Подойдёт ли для моей ниши?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Работаем с WB/Ozon, Avito, Bitrix24/AmoCRM, Bnovo (отели), ВКонтакте. Если ваша ниша другая — на аудите честно скажем, есть ли смысл. Не берём проекты, где не уверены в результате.</div>
+        <div class="faq-a">Работаем с любым бизнесом — от маркетплейсов и отелей до юридических фирм и медицины. Если у вас есть повторяющийся процесс — на бесплатном аудите честно скажем, можем ли помочь.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">
           <span class="faq-q-text">Можно ли отказаться от подписки?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Да, помесячно без штрафов. Но по опыту: клиенты не уходят, потому что агенты работают — экономят время и деньги каждый день. Ретейнер выгоден обеим сторонам.</div>
+        <div class="faq-a">Да, помесячно без штрафов. По опыту клиенты не уходят — потому что автоматизации работают и экономят время и деньги каждый день.</div>
       </div>
     </div>
   </div>
@@ -1159,10 +1089,10 @@ footer {
   <div class="container">
     <div class="cta-inner">
       <div class="reveal">
-        <div class="tag">09 // Получить пилот</div>
+        <div class="tag">08 // Получить пилот</div>
         <div class="cta-title">УЗНАЙТЕ<br>ЗА 30 МИНУТ —<br><span class="cyan">СКОЛЬКО ТЕРЯЕТ<br>ВАШ БИЗНЕС.</span></div>
         <p class="cta-sub">
-          <strong>Бесплатный аудит:</strong> показываем сколько часов и денег уходит впустую прямо сейчас. Конкретные цифры по вашей нише. Без обязательств.
+          <strong>Бесплатный аудит:</strong> показываем сколько часов и денег уходит впустую прямо сейчас. Конкретные цифры по вашей нише.
         </p>
         <div class="cta-bullets">
           <div class="cta-bullet">
@@ -1192,6 +1122,14 @@ footer {
             <button type="submit" class="form-submit" id="submitBtn">
               Получить бесплатный аудит →
             </button>
+            <div class="consent-block">
+              <label class="consent-label">
+                <input type="checkbox" id="consentCheck" required>
+                <span class="consent-text">
+                  Нажимая кнопку «Получить бесплатный аудит», я подтверждаю, что ознакомился(-ась) с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных.
+                </span>
+              </label>
+            </div>
             <div class="form-divider">или</div>
             <a href="https://t.me/aiway_agency" target="_blank" class="btn-telegram">
               <svg width="16" height="14" viewBox="0 0 24 20" fill="none" aria-hidden="true">
@@ -1223,11 +1161,19 @@ footer {
         <a href="#services">Услуги</a>
         <a href="#how">Процесс</a>
         <a href="#cases">Кейсы</a>
-        <a href="#packages">Цены</a>
         <a href="#faq">Вопросы</a>
       </div>
-      <div class="footer-meta">
-        AIWAY.AGENCY · ИИ-агентство автоматизаций · © 2026 · <span style="color:var(--cyan)">24/7</span>
+      <div class="footer-right">
+        <div class="footer-requisites">
+          ИП Тимофеев Даниил Сергеевич · ИНН: 781140688050 · ОГРНИП: 325784700190518<br>
+          ai@aiway.agency · Санкт-Петербург
+        </div>
+        <div class="footer-legal">
+          <a href="privacy.html">Политика конфиденциальности</a> · <a href="offer.html">Договор-оферта</a>
+        </div>
+        <div class="footer-meta">
+          AIWAY.AGENCY · ИИ-агентство автоматизаций · © 2026 · <span style="color:var(--cyan)">24/7</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1275,16 +1221,95 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
+/* ── Form consent checkbox ── */
+const submitBtn = document.getElementById('submitBtn');
+const consentCheck = document.getElementById('consentCheck');
+submitBtn.disabled = true;
+submitBtn.style.opacity = '0.5';
+submitBtn.style.cursor = 'not-allowed';
+consentCheck.addEventListener('change', () => {
+  submitBtn.disabled = !consentCheck.checked;
+  submitBtn.style.opacity = consentCheck.checked ? '1' : '0.5';
+  submitBtn.style.cursor = consentCheck.checked ? 'pointer' : 'not-allowed';
+});
+
+/* ── Contact input mask ── */
+const contactInput = document.querySelector('input[placeholder*="Telegram"], input[placeholder*="Телефон"]');
+if (contactInput) {
+  let mode = null;
+  contactInput.addEventListener('input', function() {
+    const val = this.value;
+    if (val === '' || val === null) { mode = null; return; }
+    if (mode === null) {
+      const first = val[0];
+      if (/[a-zA-Z]/.test(first)) mode = 'telegram';
+      else if (/[0-9]/.test(first)) mode = 'phone';
+      else if (first === '@') mode = 'telegram';
+      else return;
+    }
+    if (mode === 'telegram') {
+      let clean = val.replace(/[^@a-zA-Z0-9_]/g, '');
+      if (!clean.startsWith('@')) clean = '@' + clean;
+      clean = clean.replace(/^@+/, '@');
+      this.value = clean;
+    }
+    if (mode === 'phone') {
+      let digits = val.replace(/\D/g, '');
+      if (digits.startsWith('8') || digits.startsWith('7')) digits = digits.substring(1);
+      digits = digits.substring(0, 10);
+      if (digits.length === 0) { mode = null; this.value = ''; return; }
+      let f = '+7';
+      if (digits.length > 0) f += ' (' + digits.substring(0, 3);
+      if (digits.length >= 3) f += ') ' + digits.substring(3, 6);
+      if (digits.length >= 6) f += '-' + digits.substring(6, 8);
+      if (digits.length >= 8) f += '-' + digits.substring(8, 10);
+      this.value = f;
+    }
+  });
+  contactInput.addEventListener('keydown', function(e) {
+    const val = this.value;
+    if ((e.key === 'Backspace' || e.key === 'Delete') &&
+        (val.length <= 1 || val === '+7' || val === '+' || val === '@')) {
+      mode = null; this.value = ''; e.preventDefault();
+    }
+  });
+  contactInput.addEventListener('focus', function() {
+    if (this.value === '') mode = null;
+  });
+}
+
 /* ── Form submit ── */
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
+  const form = document.getElementById('contactForm');
+  const consent = document.getElementById('consentCheck');
+  if (!consent || !consent.checked) return;
+
   btn.textContent = 'Отправляем...';
   btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('contactForm').style.display = 'none';
+
+  const data = {
+    name: document.querySelector('input[placeholder*="имя"], input[placeholder*="Имя"]')?.value || '',
+    contact: document.querySelector('input[placeholder*="Telegram"], input[placeholder*="Телефон"]')?.value || '',
+    niche: document.querySelector('input[placeholder*="ниша"], input[placeholder*="бизнес"]')?.value || '',
+    source: 'aiway.agency',
+    date: new Date().toISOString()
+  };
+
+  try {
+    await fetch('https://hook.eu1.make.com/w0rzwqetf2gfdz0uqe6t7bcg9xdg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    form.style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
-  }, 900);
+  } catch (error) {
+    btn.textContent = 'Получить бесплатный аудит →';
+    btn.disabled = false;
+    alert('Ошибка отправки. Напишите нам: ai@aiway.agency');
+  }
 }
 
 </script>
