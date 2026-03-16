@@ -1245,9 +1245,9 @@ async function handleSubmit(e) {
   btn.disabled = true;
 
   const data = {
-    name: document.querySelector('input[placeholder*="имя"], input[placeholder*="Имя"]')?.value || '',
-    contact: document.querySelector('input[placeholder*="Telegram"], input[placeholder*="Телефон"]')?.value || '',
-    niche: document.querySelector('input[placeholder*="ниша"], input[placeholder*="бизнес"]')?.value || '',
+    name: document.getElementById('fname')?.value || '',
+    contact: document.getElementById('fcontact')?.value || '',
+    niche: document.getElementById('fniche')?.value || '',
     source: 'aiway.agency',
     date: new Date().toISOString()
   };
