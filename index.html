@@ -1233,51 +1233,6 @@ consentCheck.addEventListener('change', () => {
   submitBtn.style.cursor = consentCheck.checked ? 'pointer' : 'not-allowed';
 });
 
-/* ── Contact input mask ── */
-const contactInput = document.querySelector('input[placeholder*="Telegram"], input[placeholder*="Телефон"]');
-if (contactInput) {
-  let mode = null;
-  contactInput.addEventListener('input', function() {
-    const val = this.value;
-    if (val === '' || val === null) { mode = null; return; }
-    if (mode === null) {
-      const first = val[0];
-      if (/[a-zA-Z]/.test(first)) mode = 'telegram';
-      else if (/[0-9]/.test(first)) mode = 'phone';
-      else if (first === '@') mode = 'telegram';
-      else return;
-    }
-    if (mode === 'telegram') {
-      let clean = val.replace(/[^@a-zA-Z0-9_]/g, '');
-      if (!clean.startsWith('@')) clean = '@' + clean;
-      clean = clean.replace(/^@+/, '@');
-      this.value = clean;
-    }
-    if (mode === 'phone') {
-      let digits = val.replace(/\D/g, '');
-      if (digits.startsWith('8') || digits.startsWith('7')) digits = digits.substring(1);
-      digits = digits.substring(0, 10);
-      if (digits.length === 0) { mode = null; this.value = ''; return; }
-      let f = '+7';
-      if (digits.length > 0) f += ' (' + digits.substring(0, 3);
-      if (digits.length >= 3) f += ') ' + digits.substring(3, 6);
-      if (digits.length >= 6) f += '-' + digits.substring(6, 8);
-      if (digits.length >= 8) f += '-' + digits.substring(8, 10);
-      this.value = f;
-    }
-  });
-  contactInput.addEventListener('keydown', function(e) {
-    const val = this.value;
-    if ((e.key === 'Backspace' || e.key === 'Delete') &&
-        (val.length <= 1 || val === '+7' || val === '+' || val === '@')) {
-      mode = null; this.value = ''; e.preventDefault();
-    }
-  });
-  contactInput.addEventListener('focus', function() {
-    if (this.value === '') mode = null;
-  });
-}
-
 /* ── Form submit ── */
 async function handleSubmit(e) {
   e.preventDefault();
@@ -1311,6 +1266,77 @@ async function handleSubmit(e) {
     alert('Ошибка отправки. Напишите нам: ai@aiway.agency');
   }
 }
+
+// ── МАСКА ПОЛЯ КОНТАКТОВ ──────────────────────────
+(function() {
+  const el = document.getElementById('fcontact');
+  if (!el) return;
+
+  let mode = null;
+
+  function formatPhone(digits) {
+    let out = '+7';
+    if (digits.length > 0) out += ' (' + digits.slice(0, 3);
+    if (digits.length >= 3) out += ') ' + digits.slice(3, 6);
+    if (digits.length >= 6) out += '-' + digits.slice(6, 8);
+    if (digits.length >= 8) out += '-' + digits.slice(8, 10);
+    return out;
+  }
+
+  function getPhoneDigits(val) {
+    let d = val.replace(/\D/g, '');
+    if (d.startsWith('7') || d.startsWith('8')) d = d.slice(1);
+    return d.slice(0, 10);
+  }
+
+  el.addEventListener('keydown', function(e) {
+    if (e.key !== 'Backspace' && e.key !== 'Delete') return;
+    if (mode === 'phone') {
+      e.preventDefault();
+      let digits = getPhoneDigits(this.value);
+      digits = digits.slice(0, -1);
+      if (digits.length === 0) { mode = null; this.value = ''; }
+      else { this.value = formatPhone(digits); }
+      return;
+    }
+    if (mode === 'telegram') {
+      setTimeout(() => {
+        if (this.value === '' || this.value === '@') {
+          mode = null; this.value = '';
+        }
+      }, 0);
+    }
+  });
+
+  el.addEventListener('input', function() {
+    const raw = this.value;
+    if (raw === '') { mode = null; return; }
+    if (mode === null) {
+      const ch = raw[0];
+      if (/[0-9+]/.test(ch)) mode = 'phone';
+      else if (/[a-zA-Z@]/.test(ch)) mode = 'telegram';
+      else { this.value = ''; return; }
+    }
+    if (mode === 'telegram') {
+      let clean = raw.replace(/[^@a-zA-Z0-9_]/g, '');
+      clean = clean.replace(/^@*/, '@');
+      this.value = clean;
+      return;
+    }
+    if (mode === 'phone') {
+      let allDigits = raw.replace(/\D/g, '');
+      if (allDigits === '7' || allDigits === '8') { this.value = '+7'; return; }
+      let digits = getPhoneDigits(raw);
+      if (digits.length === 0) { mode = null; this.value = ''; return; }
+      this.value = formatPhone(digits);
+    }
+  });
+
+  el.addEventListener('focus', function() {
+    if (this.value === '') mode = null;
+  });
+})();
+// ── КОНЕЦ МАСКИ ──────────────────────────────────
 
 </script>
 </body>
