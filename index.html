@@ -582,7 +582,7 @@ footer {
   nav { padding: 0 1rem; }
   .nav-logo { font-size: 1rem; }
   .nav-tagline { font-size: .5rem; }
-  .nav-cta { font-size: .65rem; padding: .5rem .8rem; letter-spacing: .05em; }
+  .nav-cta { display: none; }
 
   /* ── HERO ── */
   #hero { padding: 6rem 1rem 3rem; }
@@ -602,19 +602,35 @@ footer {
   .niche-list li { font-size: .8rem; }
   .niche-clients-list { font-size: .7rem; }
 
-  /* ── УСЛУГИ ── */
-  .services-tabs { flex-wrap: wrap; gap: .4rem; }
-  .stab { font-size: .6rem; padding: .4rem .6rem; letter-spacing: .03em; }
-  .srv-header, .srv-row { grid-template-columns: 1fr auto auto; gap: .5rem; }
+  /* ── УСЛУГИ — ТАБЫ ── */
+  .services-tabs {
+    flex-wrap: nowrap; overflow-x: auto; gap: 8px;
+    padding: 0 1rem; margin-left: -1rem; margin-right: -1rem;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .services-tabs::-webkit-scrollbar { display: none; }
+  .stab { font-size: .6rem; padding: .5rem .8rem; letter-spacing: .03em; white-space: nowrap; flex-shrink: 0; }
+
+  /* ── УСЛУГИ — ШАПКА ── */
+  .srv-header { display: none; }
+
+  /* ── УСЛУГИ — СТРОКИ ── */
+  .srv-row {
+    display: flex; flex-direction: column; gap: .35rem;
+    padding: 1.2rem 0; border-bottom: 1px solid var(--line);
+  }
   .srv-num { display: none; }
-  .srv-col-head:first-child { display: none; }
-  .srv-col-head:nth-child(3) { display: none; }
-  .srv-col-head:nth-child(4),
-  .srv-col-head:nth-child(5) { display: block; font-size: .55rem; padding-left: 0; text-align: right; }
   .srv-desc { display: none; }
-  .srv-name { font-size: .85rem; }
-  .srv-desc-small { font-size: .65rem; }
-  .srv-row .srv-price { display: block; font-size: .7rem; text-align: right; padding-left: 0; }
+  .srv-name { font-size: .9rem; font-weight: 700; }
+  .srv-desc-small { font-size: .72rem; opacity: .6; }
+  .srv-row .srv-price {
+    display: inline; font-size: .72rem; text-align: left;
+    padding-left: 0; white-space: normal;
+  }
+  .srv-row .srv-price::before { color: var(--muted); font-size: .62rem; }
+  .srv-row .srv-price:nth-last-child(2)::before { content: 'Установка: '; }
+  .srv-row .srv-price:last-child::before { content: 'Подписка: '; }
+  .srv-row.srv-featured { padding-left: .8rem; }
 
   /* ── КАК РАБОТАЕМ ── */
   .steps { grid-template-columns: 1fr; }
@@ -642,6 +658,8 @@ footer {
   .cta-box { padding: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
   .consent-text { font-size: .6rem; }
+  .form-submit { font-size: 13px; white-space: nowrap; flex-wrap: nowrap; }
+  .form-submit::after { flex-shrink: 0; }
 
   /* ── ПОДВАЛ ── */
   .footer-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
@@ -652,10 +670,45 @@ footer {
   .footer-requisites { font-size: .55rem; }
 }
 
+/* ── BURGER MENU ── */
+.burger { display: none; }
+
+@media(max-width: 640px) {
+  .burger {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 5px; width: 44px; height: 44px; padding: 10px;
+    background: none; border: none; cursor: pointer; z-index: 601;
+  }
+  .burger span {
+    display: block; width: 22px; height: 2px; background: var(--white);
+    transition: transform .3s, opacity .3s;
+  }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 600;
+    background: rgba(8,8,16,.97); backdrop-filter: blur(24px);
+    flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.5rem; color: var(--white); text-decoration: none;
+    letter-spacing: .12em; text-transform: uppercase;
+    transition: color .15s;
+  }
+  .mobile-menu a:hover { color: var(--cyan); }
+  .mobile-menu .nav-cta {
+    margin-top: 1rem; font-family: 'Space Mono', monospace;
+    font-size: .8rem; padding: .7rem 1.5rem;
+  }
+}
+
 /* ── Очень маленькие экраны ── */
 @media(max-width: 390px) {
   .hero-headline { font-size: clamp(2.8rem, 14vw, 4rem); }
-  .nav-cta { display: none; }
 }
 </style>
 </head>
@@ -681,11 +734,21 @@ footer {
     <li><a href="#services">Услуги</a></li>
     <li><a href="#how">Процесс</a></li>
     <li><a href="#cases">Кейсы</a></li>
-
     <li><a href="#faq">Вопросы</a></li>
     <li><a href="#cta" class="nav-cta">Получить пилот</a></li>
   </ul>
+  <button class="burger" id="burgerBtn" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#niches">Ниши</a>
+  <a href="#services">Услуги</a>
+  <a href="#how">Процесс</a>
+  <a href="#cases">Кейсы</a>
+  <a href="#faq">Вопросы</a>
+  <a href="#cta" class="nav-cta">Получить пилот</a>
+</div>
 
 <!-- ════════════════════════
      01 — HERO
@@ -1245,6 +1308,22 @@ footer {
 <script>
 /* ── Lucide icons ── */
 lucide.createIcons();
+
+/* ── Burger menu ── */
+const burgerBtn = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burgerBtn.addEventListener('click', () => {
+  burgerBtn.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burgerBtn.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
 
 /* ── Scroll reveal ── */
 const revealObserver = new IntersectionObserver((entries) => {
