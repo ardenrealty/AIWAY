@@ -36,7 +36,7 @@
    RESET
 ────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body {
   font-family: 'Barlow', sans-serif;
   background: var(--bg);
@@ -657,6 +657,7 @@ footer {
   .cta-title { font-size: clamp(2rem, 10vw, 3rem); }
   .cta-box { padding: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
+  .form-input { font-size: 16px; } /* prevents iOS auto-zoom on focus */
   .consent-text { font-size: .6rem; }
   .form-submit { font-size: 13px; white-space: nowrap; flex-wrap: nowrap; }
   .form-submit::after { flex-shrink: 0; }
