@@ -45,11 +45,12 @@
    RESET
 ────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; max-width: 100%; overflow-x: hidden; }
 body {
   font-family: 'Barlow', sans-serif;
   background: var(--bg);
   color: var(--body-c);
+  max-width: 100%;
   overflow-x: hidden;
   font-size: 16px;
   line-height: 1.65;
@@ -75,10 +76,11 @@ body::before {
   mask-image: radial-gradient(ellipse 90% 75% at 65% 25%, rgba(0,0,0,.55) 0%, transparent 100%);
 }
 .hero-glow {
-  position: fixed; top: -15%; right: -10%;
-  width: 65vw; height: 65vw; max-width: 900px; max-height: 900px;
+  position: fixed; top: -15%; right: 0;
+  width: 55vw; height: 55vw; max-width: 900px; max-height: 900px;
   border-radius: 50%; pointer-events: none; z-index: 0;
   background: radial-gradient(ellipse, rgba(0,229,255,.055) 0%, transparent 70%);
+  transform: translateX(10%);
 }
 
 /* ──────────────────────────────────────
