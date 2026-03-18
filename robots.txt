@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aiway.agency/sitemap.xml

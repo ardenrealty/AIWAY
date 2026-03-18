@@ -5,7 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
 <title>AIWAY — ИИ-агенты для бизнеса</title>
-<meta name="description" content="Ваш бизнес работает на автопилоте. ИИ-агенты для WB/Ozon, недвижимости, отелей и CRM. Первый результат от 3 дней. Пилот бесплатно.">
+<meta name="description" content="AIWAY — ИИ-агентство автоматизаций. Внедряем ИИ-агентов для бизнеса: автоответы на отзывы, обработка заявок, мониторинг конкурентов. Пилот бесплатно. Санкт-Петербург.">
+<meta name="keywords" content="ИИ автоматизация, ИИ агент, искусственный интеллект для бизнеса, автоматизация бизнес-процессов, Санкт-Петербург">
+<meta property="og:title" content="AIWAY — ИИ-агенты для бизнеса">
+<meta property="og:description" content="Внедряем ИИ-агентов: автоответы, обработка заявок, мониторинг конкурентов. Пилот бесплатно.">
+<meta property="og:url" content="https://aiway.agency">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://aiway.agency">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -281,35 +289,27 @@ nav {
    04 — SERVICES
 ══════════════════════════════════════ */
 #services { background: var(--bg2); }
-.services-tabs {
-  display: flex; gap: 0; margin-top: 3.5rem;
-  border-bottom: 1px solid var(--line);
-}
-.stab {
-  font-family: 'Space Mono', monospace; font-size: .68rem;
-  color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
-  padding: .85rem 1.6rem; cursor: pointer;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-  background: none; border-top: none; border-left: none; border-right: none;
-  transition: color .15s, border-color .15s;
-}
-.stab:hover { color: var(--sub); }
-.stab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
 
-.services-panel { display: none; }
-.services-panel.active { display: block; }
+.srv-category {
+  font-family: 'Space Mono', monospace; font-size: .72rem;
+  color: var(--cyan); letter-spacing: .14em; text-transform: uppercase;
+  padding: 1rem 1.5rem .6rem; border-top: 1px solid var(--line2);
+  margin-top: 40px;
+}
+.srv-category:first-of-type { margin-top: 1.5rem; border-top: none; }
 
 .srv-header {
-  display: grid; grid-template-columns: 48px 1fr 1fr 140px 170px;
+  display: grid; grid-template-columns: 48px 1fr 160px 190px;
   padding: .75rem 1.5rem; border-bottom: 1px solid var(--line2);
+  margin-top: 3.5rem;
 }
 .srv-col-head {
   font-family: 'Space Mono', monospace; font-size: .6rem;
   color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
 }
-.srv-col-head:nth-child(4), .srv-col-head:nth-child(5) { text-align: left; padding-left: 1.5rem; }
+.srv-col-head:nth-child(3), .srv-col-head:nth-child(4) { text-align: left; padding-left: 1.5rem; }
 .srv-row {
-  display: grid; grid-template-columns: 48px 1fr 1fr 140px 170px;
+  display: grid; grid-template-columns: 48px 1fr 160px 190px;
   padding: 1.4rem 1.5rem; border-bottom: 1px solid var(--line);
   transition: background .15s; cursor: default;
 }
@@ -318,7 +318,6 @@ nav {
 .srv-num { font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--muted); padding-top: .15rem; }
 .srv-name { font-weight: 600; color: var(--white); font-size: .92rem; margin-bottom: .28rem; }
 .srv-desc-small { font-size: .78rem; color: var(--muted); font-weight: 300; }
-.srv-desc { font-size: .82rem; color: var(--sub); line-height: 1.55; font-weight: 300; }
 .srv-price { font-family: 'Space Mono', monospace; font-size: .72rem; color: var(--green); text-align: left; letter-spacing: .04em; white-space: nowrap; align-self: center; }
 .srv-row.srv-featured { background: var(--cyan-dim); border-left: 2px solid var(--cyan); }
 
@@ -587,8 +586,8 @@ footer {
 ══════════════════════════════════════ */
 @media(max-width: 1100px) {
   .niches-grid { grid-template-columns: repeat(2, 1fr); }
-  .srv-header, .srv-row { grid-template-columns: 48px 1fr 1fr; }
-  .srv-col-head:nth-child(4), .srv-col-head:nth-child(5), .srv-price { display: none; }
+  .srv-header, .srv-row { grid-template-columns: 48px 1fr; }
+  .srv-col-head:nth-child(3), .srv-col-head:nth-child(4), .srv-price { display: none; }
 }
 @media(max-width: 900px) {
   .container, nav, #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
@@ -631,17 +630,11 @@ footer {
   .niche-list li { font-size: .8rem; }
   .niche-clients-list { font-size: .7rem; }
 
-  /* ── УСЛУГИ — ТАБЫ ── */
-  .services-tabs {
-    flex-wrap: nowrap; overflow-x: auto; gap: 8px;
-    padding: 0 1rem; margin-left: -1rem; margin-right: -1rem;
-    scrollbar-width: none; -ms-overflow-style: none;
-  }
-  .services-tabs::-webkit-scrollbar { display: none; }
-  .stab { font-size: .6rem; padding: .5rem .8rem; letter-spacing: .03em; white-space: nowrap; flex-shrink: 0; }
-
   /* ── УСЛУГИ — ШАПКА ── */
   .srv-header { display: none; }
+
+  /* ── УСЛУГИ — КАТЕГОРИИ ── */
+  .srv-category { padding: .8rem 0 .4rem; font-size: .65rem; }
 
   /* ── УСЛУГИ — СТРОКИ ── */
   .srv-row {
@@ -649,7 +642,6 @@ footer {
     padding: 1.2rem 0; border-bottom: 1px solid var(--line);
   }
   .srv-num { display: none; }
-  .srv-desc { display: none; }
   .srv-name { font-size: .9rem; font-weight: 700; }
   .srv-desc-small { font-size: .72rem; opacity: .6; }
   .srv-row .srv-price {
@@ -823,244 +815,123 @@ footer {
 <section id="services">
   <div class="container">
     <div class="tag reveal">04 // Услуги</div>
-    <h2 class="sec-title reveal">18 УСЛУГ.<br><span class="dim">6 КАТЕГОРИЙ.</span></h2>
+    <h2 class="sec-title reveal">15 УСЛУГ.<br><span class="dim">6 КАТЕГОРИЙ.</span></h2>
     <p class="sec-sub reveal">Каждая услуга — это результат, который вы видите. Не техническое описание, а конкретное действие: «отзывы закрываются сами», «заявки не теряются».</p>
 
     <div class="reveal">
-      <div class="services-tabs">
-        <button class="stab active" data-panel="cat0">// Флагман</button>
-        <button class="stab" data-panel="cat1">// Маркетплейсы</button>
-        <button class="stab" data-panel="cat2">// Продажи и CRM</button>
-        <button class="stab" data-panel="cat3">// Контент и визуал</button>
-        <button class="stab" data-panel="cat4">// Разработка</button>
-        <button class="stab" data-panel="cat5">// Интеграция</button>
+      <div class="srv-header">
+        <div class="srv-col-head">#</div>
+        <div class="srv-col-head">Услуга</div>
+        <div class="srv-col-head">Установка</div>
+        <div class="srv-col-head">Подписка / мес</div>
       </div>
 
-      <!-- CAT 0 — ФЛАГМАН -->
-      <div class="services-panel active" id="cat0">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row srv-featured">
-          <div class="srv-num">01</div>
-          <div><div class="srv-name">Комплексная ИИ-автоматизация</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
-          <div class="srv-desc">Аудит → карта процессов → внедрение пакета ИИ-агентов под специфику бизнеса</div>
-          <div class="srv-price">от 50 000 ₽</div>
-          <div class="srv-price">40 000–90 000 ₽</div>
-        </div>
-        <div class="srv-row srv-featured">
-          <div class="srv-num">02</div>
-          <div><div class="srv-name">ИИ-бот Telegram</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
-          <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
-          <div class="srv-price">от 25 000 ₽</div>
-          <div class="srv-price">12 000–20 000 ₽</div>
-        </div>
-        <div class="srv-row srv-featured">
-          <div class="srv-num">03</div>
-          <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
-          <div class="srv-desc">Заявка → ИИ-квалификация → сделка в CRM → уведомление. 24/7</div>
-          <div class="srv-price">от 20 000 ₽</div>
-          <div class="srv-price">15 000–30 000 ₽</div>
-        </div>
-        <div class="srv-row srv-featured">
-          <div class="srv-num">04</div>
-          <div><div class="srv-name">Автоответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
-          <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
-          <div class="srv-price">бесплатно</div>
-          <div class="srv-price">8 000–18 000 ₽</div>
-        </div>
-        <div class="srv-row srv-featured">
-          <div class="srv-num">05</div>
-          <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Ежедневный отчёт в Telegram</div></div>
-          <div class="srv-desc">Парсинг цен и позиций конкурентов. Анализ трендов. Отчёт каждое утро в Telegram</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">10 000–18 000 ₽</div>
-        </div>
+      <!-- // ФЛАГМАН -->
+      <div class="srv-category">// Флагман</div>
+      <div class="srv-row srv-featured">
+        <div class="srv-num">01</div>
+        <div><div class="srv-name">Комплексная ИИ-автоматизация</div><div class="srv-desc-small">HR · Медицина · Право · Образование</div></div>
+        <div class="srv-price">от 70 000 ₽</div>
+        <div class="srv-price">60 000–120 000 ₽</div>
       </div>
 
-      <!-- CAT 1 — МАРКЕТПЛЕЙСЫ -->
-      <div class="services-panel" id="cat1">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">01</div>
-          <div><div class="srv-name">Автоответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
-          <div class="srv-desc">Каждый отзыв — персональный ответ за 2–3 мин. Работает 24/7 без участия менеджера</div>
-          <div class="srv-price">бесплатно</div>
-          <div class="srv-price">8 000–18 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">02</div>
-          <div><div class="srv-name">Оптимизация карточек товаров</div><div class="srv-desc-small">SEO · описания · инфографика</div></div>
-          <div class="srv-desc">Переписывает SEO-тексты под алгоритмы маркетплейсов. Создаёт инфографику автоматически</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">12 000–20 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">03</div>
-          <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Ежедневный отчёт в Telegram</div></div>
-          <div class="srv-desc">Парсинг цен и позиций конкурентов. Анализ трендов. Отчёт каждое утро в Telegram</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">10 000–18 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">04</div>
-          <div><div class="srv-name">Видеокарточки WB/Ozon</div><div class="srv-desc-small">5–8 сек ролик из фото товара</div></div>
-          <div class="srv-desc">Создаёт видео из фото товара. Формат для WB/Ozon Video. Без съёмки и дизайнера</div>
-          <div class="srv-price">от 15 000 ₽</div>
-          <div class="srv-price">12 000–20 000 ₽</div>
-        </div>
+      <!-- // ИНТЕЛЛЕКТ -->
+      <div class="srv-category">// Интеллект</div>
+      <div class="srv-row">
+        <div class="srv-num">02</div>
+        <div><div class="srv-name">ИИ-база знаний (RAG-система)</div><div class="srv-desc-small">Документы · регламенты · FAQ · поиск</div></div>
+        <div class="srv-price">от 35 000 ₽</div>
+        <div class="srv-price">25 000–60 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">03</div>
+        <div><div class="srv-name">Голосовой ИИ-бот</div><div class="srv-desc-small">Звонки · запись · квалификация · 24/7</div></div>
+        <div class="srv-price">от 30 000 ₽</div>
+        <div class="srv-price">20 000–45 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">04</div>
+        <div><div class="srv-name">Речевая аналитика звонков</div><div class="srv-desc-small">100% звонков · скрипты · качество · отчёты</div></div>
+        <div class="srv-price">от 25 000 ₽</div>
+        <div class="srv-price">15 000–40 000 ₽</div>
       </div>
 
-      <!-- CAT 2 — ПРОДАЖИ И CRM -->
-      <div class="services-panel" id="cat2">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">05</div>
-          <div><div class="srv-name">Обработка входящих заявок</div><div class="srv-desc-small">Любой канал · 24/7 · без потерь</div></div>
-          <div class="srv-desc">Заявка → ИИ-квалификация → сделка в CRM → уведомление менеджеру. 24/7</div>
-          <div class="srv-price">от 20 000 ₽</div>
-          <div class="srv-price">15 000–30 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">06</div>
-          <div><div class="srv-name">Автоматические КП</div><div class="srv-desc-small">Персональное КП за 30 секунд</div></div>
-          <div class="srv-desc">1 кнопка → ИИ-анализ сделки → персональное КП за 30 секунд</div>
-          <div class="srv-price">от 20 000 ₽</div>
-          <div class="srv-price">15 000–25 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">07</div>
-          <div><div class="srv-name">Аналитика воронки продаж</div><div class="srv-desc-small">Еженедельный отчёт директору</div></div>
-          <div class="srv-desc">Еженедельный отчёт: конверсии, узкие места, рекомендации директору</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">10 000–18 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">08</div>
-          <div><div class="srv-name">ИИ-ответы в Avito / Telegram</div><div class="srv-desc-small">Сообщение → квалификация → ответ</div></div>
-          <div class="srv-desc">Сообщение → квалификация → ответ → уведомление менеджеру</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">8 000–15 000 ₽</div>
-        </div>
+      <!-- // МАРКЕТПЛЕЙСЫ -->
+      <div class="srv-category">// Маркетплейсы</div>
+      <div class="srv-row">
+        <div class="srv-num">05</div>
+        <div><div class="srv-name">Автоответы на отзывы</div><div class="srv-desc-small">WB · Ozon · Avito · 24/7</div></div>
+        <div class="srv-price">бесплатно</div>
+        <div class="srv-price">12 000–20 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">06</div>
+        <div><div class="srv-name">Управление карточками товаров</div><div class="srv-desc-small">SEO-тексты · инфографика · видеокарточки</div></div>
+        <div class="srv-price">от 20 000 ₽</div>
+        <div class="srv-price">18 000–30 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">07</div>
+        <div><div class="srv-name">Мониторинг конкурентов</div><div class="srv-desc-small">Цены · позиции · тренды · отчёт в Telegram</div></div>
+        <div class="srv-price">от 15 000 ₽</div>
+        <div class="srv-price">10 000–18 000 ₽</div>
       </div>
 
-      <!-- CAT 3 — КОНТЕНТ И ВИЗУАЛ -->
-      <div class="services-panel" id="cat3">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">09</div>
-          <div><div class="srv-name">ИИ-контент для ВКонтакте/Telegram</div><div class="srv-desc-small">Автопостинг · по расписанию</div></div>
-          <div class="srv-desc">ИИ пишет текст → генерирует визуал → публикует по расписанию</div>
-          <div class="srv-price">от 10 000 ₽</div>
-          <div class="srv-price">10 000–18 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">10</div>
-          <div><div class="srv-name">Рекламные баннеры + видео</div><div class="srv-desc-small">4K баннеры · видеоролики</div></div>
-          <div class="srv-desc">Генерирует 4K баннеры и видеоролики. Без дизайнера</div>
-          <div class="srv-price">от 15 000 ₽</div>
-          <div class="srv-price">12 000–20 000 ₽</div>
-        </div>
+      <!-- // ПРОДАЖИ И CRM -->
+      <div class="srv-category">// Продажи и CRM</div>
+      <div class="srv-row">
+        <div class="srv-num">08</div>
+        <div><div class="srv-name">Обработка заявок + ИИ-ответы</div><div class="srv-desc-small">Все каналы · квалификация · CRM · 24/7</div></div>
+        <div class="srv-price">от 25 000 ₽</div>
+        <div class="srv-price">18 000–35 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">09</div>
+        <div><div class="srv-name">Автоматические КП</div><div class="srv-desc-small">Персональное КП за 30 секунд</div></div>
+        <div class="srv-price">от 20 000 ₽</div>
+        <div class="srv-price">15 000–25 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">10</div>
+        <div><div class="srv-name">Аналитика воронки продаж</div><div class="srv-desc-small">Еженедельный отчёт директору</div></div>
+        <div class="srv-price">от 10 000 ₽</div>
+        <div class="srv-price">10 000–18 000 ₽</div>
       </div>
 
-      <!-- CAT 4 — РАЗРАБОТКА -->
-      <div class="services-panel" id="cat4">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">11</div>
-          <div><div class="srv-name">Telegram Mini App под бизнес</div><div class="srv-desc-small">Магазин · запись · каталог · лояльность</div></div>
-          <div class="srv-desc">Заменяет мобильное приложение. Магазин, запись, каталог, программа лояльности в Telegram</div>
-          <div class="srv-price">от 45 000 ₽</div>
-          <div class="srv-price">от 8 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">12</div>
-          <div><div class="srv-name">ИИ-бот Telegram</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
-          <div class="srv-desc">Знает ассортимент, берёт заявки 24/7. Квалифицирует и передаёт менеджеру</div>
-          <div class="srv-price">от 25 000 ₽</div>
-          <div class="srv-price">12 000–20 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">13</div>
-          <div><div class="srv-name">Сайт / лендинг с ИИ-воронкой</div><div class="srv-desc-small">ИИ-чат · квалификация лида · CRM</div></div>
-          <div class="srv-desc">Сайт с ИИ, квалификацией лида и передачей в CRM</div>
-          <div class="srv-price">от 30 000 ₽</div>
-          <div class="srv-price">от 5 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">14</div>
-          <div><div class="srv-name">Сайт / лендинг под ключ</div><div class="srv-desc-small">HTML · Tilda</div></div>
-          <div class="srv-desc">Сайты и лендинги любой сложности</div>
-          <div class="srv-price">от 30 000 ₽</div>
-          <div class="srv-price">—</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">15</div>
-          <div><div class="srv-name">ИИ-виджет для сайта</div><div class="srv-desc-small">Встраиваемый чат · квалификация</div></div>
-          <div class="srv-desc">Встраиваемый чат. Знает продукт и прайс. Квалифицирует лид и передаёт в CRM</div>
-          <div class="srv-price">от 15 000 ₽</div>
-          <div class="srv-price">от 5 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">16</div>
-          <div><div class="srv-name">Создание приложений</div><div class="srv-desc-small">Веб-приложения · инструменты · автоматизация</div></div>
-          <div class="srv-desc">Разрабатываем веб-приложения и цифровые инструменты под задачи вашего бизнеса</div>
-          <div class="srv-price">от 35 000 ₽</div>
-          <div class="srv-price">от 8 000 ₽</div>
-        </div>
+      <!-- // РАЗРАБОТКА -->
+      <div class="srv-category">// Разработка</div>
+      <div class="srv-row">
+        <div class="srv-num">11</div>
+        <div><div class="srv-name">ИИ-бот Telegram</div><div class="srv-desc-small">Консультант · продажник · поддержка</div></div>
+        <div class="srv-price">от 25 000 ₽</div>
+        <div class="srv-price">15 000–25 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">12</div>
+        <div><div class="srv-name">Telegram Mini App</div><div class="srv-desc-small">Магазин · запись · каталог · лояльность</div></div>
+        <div class="srv-price">от 65 000 ₽</div>
+        <div class="srv-price">от 15 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">13</div>
+        <div><div class="srv-name">Сайт + ИИ-виджет</div><div class="srv-desc-small">Лендинг · ИИ-чат · квалификация · CRM</div></div>
+        <div class="srv-price">от 40 000 ₽</div>
+        <div class="srv-price">от 12 000 ₽</div>
       </div>
 
-      <!-- CAT 5 — ИНТЕГРАЦИЯ -->
-      <div class="services-panel" id="cat5">
-        <div class="srv-header">
-          <div class="srv-col-head">#</div>
-          <div class="srv-col-head">Услуга</div>
-          <div class="srv-col-head">Что делает агент</div>
-          <div class="srv-col-head">Установка</div>
-          <div class="srv-col-head">Подписка / мес</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">17</div>
-          <div><div class="srv-name">ИИ-интеграция под ключ</div><div class="srv-desc-small">в любую сферу бизнеса</div></div>
-          <div class="srv-desc">Аудит → карта автоматизаций → внедрение пакета ИИ-агентов под специфику бизнеса</div>
-          <div class="srv-price">от 50 000 ₽</div>
-          <div class="srv-price">40 000–90 000 ₽</div>
-        </div>
-        <div class="srv-row">
-          <div class="srv-num">18</div>
-          <div><div class="srv-name">Автоматизация бизнес-процессов</div><div class="srv-desc-small">Любые процессы · документооборот · отчёты</div></div>
-          <div class="srv-desc">Автоматизируем любые повторяющиеся процессы: документооборот, уведомления, отчёты, согласования</div>
-          <div class="srv-price">от 20 000 ₽</div>
-          <div class="srv-price">от 5 000 ₽</div>
-        </div>
+      <!-- // ИНТЕГРАЦИЯ -->
+      <div class="srv-category">// Интеграция</div>
+      <div class="srv-row">
+        <div class="srv-num">14</div>
+        <div><div class="srv-name">Автоматизация бизнес-процессов</div><div class="srv-desc-small">Документооборот · уведомления · отчёты · согласования</div></div>
+        <div class="srv-price">от 25 000 ₽</div>
+        <div class="srv-price">от 15 000 ₽</div>
+      </div>
+      <div class="srv-row">
+        <div class="srv-num">15</div>
+        <div><div class="srv-name">Веб-приложение под задачу</div><div class="srv-desc-small">Дашборды · инструменты · внутренние системы</div></div>
+        <div class="srv-price">от 55 000 ₽</div>
+        <div class="srv-price">от 15 000 ₽</div>
       </div>
     </div>
   </div>
@@ -1311,16 +1182,6 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === '#' + current ? '#00E5FF' : '';
   });
 }, { passive: true });
-
-/* ── Services tabs ── */
-document.querySelectorAll('.stab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.services-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.panel).classList.add('active');
-  });
-});
 
 /* ── FAQ accordion ── */
 document.querySelectorAll('.faq-q').forEach(btn => {
