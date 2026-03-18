@@ -646,10 +646,17 @@ footer {
   .srv-name { font-size: .9rem; font-weight: 700; }
   .srv-desc-small { font-size: .72rem; opacity: .6; }
   .srv-desc { font-size: .75rem; opacity: .7; }
-  .srv-row .srv-price {
-    display: block; font-size: .72rem; text-align: left;
-    padding-left: 0; margin-left: 0; white-space: normal;
+  .srv-price {
+    text-align: left !important;
+    width: 100% !important;
+    display: block !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
   }
+  .srv-row {
+    text-align: left !important;
+  }
+  .srv-row .srv-price { font-size: .72rem; white-space: normal; }
   .srv-row .srv-price::before { color: var(--muted); font-size: .62rem; }
   .srv-row .srv-price:nth-last-child(2)::before { content: 'Установка: '; }
   .srv-row .srv-price:last-child::before { content: 'Подписка: '; }
